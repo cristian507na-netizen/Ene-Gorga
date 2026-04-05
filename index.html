@@ -128,15 +128,20 @@
                               linear-gradient(90deg, rgba(117, 119, 125, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
         }
-        /* Service Cards — hover amber bottom border */
         .service-card {
             border-bottom: 4px solid transparent;
             transition: border-bottom-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .service-card:hover {
-            border-bottom-color: #854300;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-        }
+  .detail-card {
+    background: white;
+    border: 1px solid rgba(197, 198, 205, 0.2);
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease;
+  }
+  .detail-card:hover {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+  }
         /* Project cards */
         .project-card .project-overlay {
             background: rgba(0,0,0,0.6);
@@ -151,142 +156,223 @@
             from { filter: blur(8px); opacity: 0; transform: translateY(4px); }
             to   { filter: blur(0);   opacity: 1; transform: translateY(0); }
         }
-        /* Shimmer Button Animation */
-        @keyframes shimmer-btn {
-            0% { background-position: 0% 0%; }
-            100% { background-position: -200% 0%; }
+        @property --gradient-angle {
+          syntax: "<angle>";
+          initial-value: 0deg;
+          inherits: false;
         }
-        /* Shiny Text Animation */
-        @keyframes shiny-text {
-            0%, 90%, 100% {
-                background-position: calc(-100% - var(--shiny-width)) 0;
-            }
-            30%, 60% {
-                background-position: calc(100% + var(--shiny-width)) 0;
-            }
+
+        @property --gradient-angle-offset {
+          syntax: "<angle>";
+          initial-value: 0deg;
+          inherits: false;
         }
-        /* Animated Hover Border */
-        .hover-border-card {
-            position: relative;
-            border-radius: 1rem;
-            overflow: hidden;
-            background: #0D1B2A;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+
+        @property --gradient-percent {
+          syntax: "<percentage>";
+          initial-value: 5%;
+          inherits: false;
         }
-        .hover-border-card::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
-            background: conic-gradient(from 90deg at 50% 50%, transparent 0%, transparent 50%, rgba(232, 160, 32, 0.4) 80%, #E8A020 100%);
-            animation: spin 3s linear infinite;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+
+        @property --gradient-shine {
+          syntax: "<color>";
+          initial-value: white;
+          inherits: false;
         }
-        .hover-border-card:hover::before {
-            opacity: 1;
-        }
-        .hover-border-card-inner {
-            position: absolute;
-            inset: 2px;
-            background: #0D1B2A;
-            border-radius: calc(1rem - 2px);
-            z-index: 10;
-            transition: background-color 0.4s ease;
-        }
-        .hover-border-card:hover .hover-border-card-inner {
-            background: #1B3A5C;
-        }
-        .hover-border-content {
-            position: relative;
-            z-index: 20;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes cursor-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        /* Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Floating Contact Button */
-        .floating-cta {
-          position: fixed;
-          bottom: 2rem;
-          right: 2rem;
-          z-index: 100;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          background: #333e50;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 9999px;
-          font-weight: 800;
-          font-size: 10px;
+
+        .shiny-cta {
+          --shiny-cta-bg: #854300;
+          --shiny-cta-bg-subtle: #a05200;
+          --shiny-cta-fg: #ffffff;
+          --shiny-cta-highlight: #ffb783;
+          --shiny-cta-highlight-subtle: #ffdcc5;
+          --animation: gradient-angle linear infinite;
+          --duration: 3s;
+          --shadow-size: 2px;
+          --transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+          
+          isolation: isolate;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          padding: 0.75rem 1.5rem;
+          font-family: "Space Grotesk", sans-serif;
+          font-size: 0.75rem;
+          line-height: 1.2;
+          font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          box-shadow: 0 8px 20px -5px rgba(0,0,0,0.3);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255,255,255,0.1);
+          border: 1px solid transparent;
+          border-radius: 4px;
+          color: var(--shiny-cta-fg);
+          background: linear-gradient(var(--shiny-cta-bg), var(--shiny-cta-bg)) padding-box,
+            conic-gradient(
+              from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+              transparent,
+              var(--shiny-cta-highlight) var(--gradient-percent),
+              var(--gradient-shine) calc(var(--gradient-percent) * 2),
+              var(--shiny-cta-highlight) calc(var(--gradient-percent) * 3),
+              transparent calc(var(--gradient-percent) * 4)
+            ) border-box;
+          box-shadow: inset 0 0 0 1px var(--shiny-cta-bg-subtle);
+          transition: var(--transition);
+          transition-property: --gradient-angle-offset, --gradient-percent, --gradient-shine;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
         }
-        .floating-cta:hover {
-          transform: translateY(-4px) scale(1.02);
-          background: #000;
-          box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
-        }
-        .floating-cta .pulse {
-          width: 6px;
-          height: 6px;
-          background: #854300;
-          border-radius: 50%;
-          position: relative;
-        }
-        .floating-cta .pulse::after {
-          content: '';
+
+        .shiny-cta::before,
+        .shiny-cta::after,
+        .shiny-cta span::before {
+          content: "";
+          pointer-events: none;
           position: absolute;
-          inset: 0;
-          background: inherit;
-          border-radius: inherit;
-          animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          inset-inline-start: 50%;
+          inset-block-start: 50%;
+          translate: -50% -50%;
+          z-index: -1;
         }
-        @keyframes pulse-ring {
-          0% { transform: scale(1); opacity: 0.8; }
-          100% { transform: scale(3.5); opacity: 0; }
+
+        .shiny-cta:active {
+          translate: 0 1px;
+        }
+
+        /* Dots pattern */
+        .shiny-cta::before {
+          --size: calc(100% - var(--shadow-size) * 3);
+          --position: 2px;
+          --space: calc(var(--position) * 2);
+          width: var(--size);
+          height: var(--size);
+          background: radial-gradient(
+            circle at var(--position) var(--position),
+            white calc(var(--position) / 4),
+            transparent 0
+          ) padding-box;
+          background-size: var(--space) var(--space);
+          background-repeat: space;
+          mask-image: conic-gradient(
+            from calc(var(--gradient-angle) + 45deg),
+            black,
+            transparent 10% 90%,
+            black
+          );
+          border-radius: inherit;
+          opacity: 0.2;
+          z-index: -1;
+        }
+
+        /* Inner shimmer */
+        .shiny-cta::after {
+          --animation: shimmer-rotation linear infinite;
+          width: 100%;
+          aspect-ratio: 1;
+          background: linear-gradient(
+            -50deg,
+            transparent,
+            var(--shiny-cta-highlight),
+            transparent
+          );
+          mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+          opacity: 0.3;
+        }
+
+        .shiny-cta span {
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .shiny-cta span::before {
+          --size: calc(100% + 1rem);
+          width: var(--size);
+          height: var(--size);
+          box-shadow: inset 0 -1ex 2rem 4px var(--shiny-cta-highlight);
+          opacity: 0;
+          transition: opacity var(--transition);
+          animation: calc(var(--duration) * 1.5) breathe-scale linear infinite;
+        }
+
+        /* Animate */
+        .shiny-cta,
+        .shiny-cta::before,
+        .shiny-cta::after {
+          animation: var(--animation) var(--duration),
+            var(--animation) calc(var(--duration) / 0.4) reverse paused;
+          animation-composition: add;
+        }
+
+        .shiny-cta:is(:hover, :focus-visible) {
+          --gradient-percent: 20%;
+          --gradient-angle-offset: 95deg;
+          --gradient-shine: var(--shiny-cta-highlight-subtle);
+        }
+
+        .shiny-cta:is(:hover, :focus-visible),
+        .shiny-cta:is(:hover, :focus-visible)::before,
+        .shiny-cta:is(:hover, :focus-visible)::after {
+          animation-play-state: running;
+        }
+
+        .shiny-cta:is(:hover, :focus-visible) span::before {
+          opacity: 0.1;
+        }
+
+        @keyframes gradient-angle {
+          to {
+            --gradient-angle: 360deg;
+          }
+        }
+
+        @keyframes shimmer-rotation {
+          to {
+            rotate: 360deg;
+          }
+        }
+
+        @keyframes breathe-scale {
+          from, to {
+            scale: 1;
+          }
+          50% {
+            scale: 1.2;
+          }
         }
     </style>
 </head>
 <body class="bg-background text-on-surface">
-<!-- Top Navigation Shell -->
 <nav class="fixed top-0 w-full z-50 bg-slate-50/95 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
-<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-3 md:py-4 max-w-full mx-auto gap-4 md:gap-0">
-<div class="text-xl font-bold tracking-tighter text-slate-900 font-headline">ING. ENE GORGA</div>
-<div class="flex items-center gap-6 md:gap-8 font-headline tracking-tight">
-<a class="text-slate-900 border-b-2 border-tertiary-container pb-0.5 text-[10px] md:text-sm" href="index.html">Inicio</a>
-<a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="servicios.html">Servicios</a>
-<a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="proyectos.html">Proyectos</a>
-<a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="contacto.html">Contacto</a>
-</div>
-<a href="contacto.html" class="hidden md:inline-block bg-tertiary-container text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:brightness-110 transition-all">
-    COTIZAR PROYECTO
-</a>
-</div>
+  <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1600px] mx-auto">
+    <div class="text-xl font-bold tracking-tighter text-slate-900 font-headline flex-shrink-0">ING. ENE GORGA</div>
+    
+    <!-- Navigation Links -->
+    <div class="hidden md:flex items-center gap-8 font-headline tracking-tight">
+      <a class="text-xs font-bold text-slate-900 border-b-2 border-tertiary-container pb-0.5 uppercase tracking-widest" href="index.html">Inicio</a>
+      <a class="text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors uppercase tracking-widest" href="servicios.html">Servicios</a>
+      <a class="text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors uppercase tracking-widest" href="proyectos.html">Proyectos</a>
+      <a class="text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors uppercase tracking-widest" href="contacto.html">Contacto</a>
+    </div>
+
+    <!-- Desktop CTA only -->
+    <div class="hidden md:block">
+      <a class="shiny-cta" href="contacto.html">
+        <span>
+          COTIZAR PROYECTO
+          <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Mobile Navigation (Simple Links) -->
+    <div class="flex md:hidden items-center gap-4 font-headline tracking-tighter">
+      <a class="text-[10px] font-bold text-slate-900 uppercase" href="index.html">Inicio</a>
+      <a class="text-[10px] font-bold text-slate-500 uppercase" href="servicios.html">Servicios</a>
+      <a class="text-[10px] font-bold text-slate-500 uppercase" href="proyectos.html">Proyectos</a>
+      <a class="text-[10px] font-bold text-slate-500 uppercase" href="contacto.html">Contacto</a>
+    </div>
+  </div>
 </nav>
 
 <main class="pt-28 blueprint-grid" id="home">
@@ -322,8 +408,11 @@
 
   <!-- CTAs -->
   <div class="flex flex-wrap gap-4 mb-10">
-    <a href="contacto.html" class="inline-block px-10 py-4 bg-[#854300] text-white font-bold tracking-widest uppercase text-sm transition-all duration-300 hover:brightness-110">
-      COTIZAR PROYECTO
+    <a href="contacto.html" class="shiny-cta">
+      <span>
+        COTIZAR PROYECTO
+        <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+      </span>
     </a>
     <a href="proyectos.html" class="inline-block px-10 py-4 border-2 border-primary text-primary font-bold tracking-widest uppercase text-sm transition-all duration-300 hover:bg-primary hover:text-white">
       VER PORTAFOLIO
@@ -367,40 +456,21 @@
             </div>
         </div>
 
-        <!-- Grid de Métricas (Animated Hover Border) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
-            <!-- Metric 1 -->
-            <div class="hover-border-card h-[160px]">
-                <div class="hover-border-card-inner"></div>
-                <div class="hover-border-content p-8">
-                    <div class="text-4xl font-bold text-white font-headline"><span class="count-up" data-target="8">0</span>+</div>
-                    <div class="mt-4">
-                        <div class="h-px w-full bg-white/20 mb-3"></div>
-                        <p class="text-surface-variant text-xs font-bold leading-tight">Años de experiencia en el rubro.</p>
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 pt-10 border-t border-outline-variant/20">
+            <div>
+                <div class="text-5xl font-bold font-headline text-primary"><span class="count-up" data-target="8">0</span>+</div>
+                <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black mt-2">Años de Exp.</div>
+                <p class="text-outline text-[11px] mt-2 leading-relaxed">Trayectoria en el rubro electromecánico.</p>
             </div>
-            <!-- Metric 2 -->
-            <div class="hover-border-card h-[160px]">
-                <div class="hover-border-card-inner"></div>
-                <div class="hover-border-content p-8">
-                    <div class="text-4xl font-bold text-white font-headline"><span class="count-up" data-target="100">0</span>%</div>
-                    <div class="mt-4">
-                        <div class="h-px w-full bg-white/20 mb-3"></div>
-                        <p class="text-surface-variant text-xs font-bold leading-tight">Servicio Integral y Normativo.</p>
-                    </div>
-                </div>
+            <div>
+                <div class="text-5xl font-bold font-headline text-primary"><span class="count-up" data-target="100">0</span>%</div>
+                <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black mt-2">Compromiso</div>
+                <p class="text-outline text-[11px] mt-2 leading-relaxed">Servicio integral y normativo bajo estándares.</p>
             </div>
-            <!-- Metric 3 -->
-            <div class="hover-border-card h-[160px]">
-                <div class="hover-border-card-inner"></div>
-                <div class="hover-border-content p-8">
-                    <div class="text-4xl font-bold text-white font-headline"><span class="count-up" data-target="1">0</span>:1</div>
-                    <div class="mt-4">
-                        <div class="h-px w-full bg-white/20 mb-3"></div>
-                        <p class="text-surface-variant text-xs font-bold leading-tight">Asesoramiento y atención personalizada.</p>
-                    </div>
-                </div>
+            <div>
+                <div class="text-5xl font-bold font-headline text-primary"><span class="count-up" data-target="1">0</span>:1</div>
+                <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black mt-2">Atención</div>
+                <p class="text-outline text-[11px] mt-2 leading-relaxed">Asesoramiento técnico y personalizado.</p>
             </div>
         </div>
     </div>
@@ -493,12 +563,6 @@
         <h3 class="text-2xl font-bold text-primary font-headline">Diseño y <br>Especificaciones</h3>
         <p class="text-on-surface-variant leading-relaxed text-sm">Planimetría técnica y memorias descriptivas de cálculo bajo normas locales e internacionales.</p>
         
-        <div class="details hidden group-hover:block transition-all duration-500 animate-fadeIn">
-          <ul class="space-y-3 pt-4 border-t border-outline-variant/10">
-            <li class="flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-widest"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full"></span>NFPA / IPC Compliance</li>
-            <li class="flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-widest"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full"></span>Planos Eléctricos y HVAC</li>
-          </ul>
-        </div>
         <a href="servicios.html#diseno" class="flex items-center gap-2 text-xs font-black tracking-widest uppercase text-tertiary-container hover:gap-4 transition-all pt-4">Saber más →</a>
       </div>
     </div>
@@ -514,12 +578,6 @@
         </div>
         <h3 class="text-2xl font-bold text-primary font-headline">Construcción y <br>Supervisión</h3>
         <p class="text-on-surface-variant leading-relaxed text-sm">Dirección técnica en campo con control estricto de cronograma y calidad de instalaciones.</p>
-        <div class="details hidden group-hover:block transition-all animate-fadeIn">
-          <ul class="space-y-3 pt-4 border-t border-outline-variant/10">
-            <li class="flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-widest"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full"></span>Control de Sub-contratistas</li>
-            <li class="flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-widest"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full"></span>Informes de Avance Semanal</li>
-          </ul>
-        </div>
         <a href="servicios.html#diseno" class="flex items-center gap-2 text-xs font-black tracking-widest uppercase text-tertiary-container hover:gap-4 transition-all pt-4">Saber más →</a>
       </div>
     </div>
@@ -535,12 +593,6 @@
         </div>
         <h3 class="text-2xl font-bold text-primary font-headline">Inspección <br>Técnica</h3>
         <p class="text-on-surface-variant leading-relaxed text-sm">Evaluación y certificación de sistemas para recepción de bomberos y permisos oficiales.</p>
-        <div class="details hidden group-hover:block transition-all animate-fadeIn">
-          <ul class="space-y-3 pt-4 border-t border-outline-variant/10">
-            <li class="flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-widest"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full"></span>Auditoría de Sistemas</li>
-            <li class="flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-widest"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full"></span>Gestión de Bomberos PA</li>
-          </ul>
-        </div>
         <a href="servicios.html#diseno" class="flex items-center gap-2 text-xs font-black tracking-widest uppercase text-tertiary-container hover:gap-4 transition-all pt-4">Saber más →</a>
       </div>
     </div>
