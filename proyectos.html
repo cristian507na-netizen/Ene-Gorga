@@ -51,14 +51,34 @@
   .reveal { opacity:0; transform:translateY(24px); transition:all 0.7s cubic-bezier(0.5,0,0,1); }
   .reveal.revealed { opacity:1; transform:translateY(0); }
 
-  /* Project card */
   .proj-card {
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
-  .proj-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.12); transform: translateY(-4px); }
-  .proj-card .proj-img { transition: transform 0.5s ease; }
-  .proj-card:hover .proj-img { transform: scale(1.04); }
+  .proj-card:hover { 
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1); 
+      transform: translateY(-6px); 
+  }
+  .proj-card:active { 
+      transform: scale(0.98) translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  .proj-card .proj-img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .proj-card:hover .proj-img { transform: scale(1.05); }
+
+  /* Enhance click target for the "Ver más" area */
+  .see-more-trigger {
+      padding: 8px 16px;
+      margin: -8px -16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 6px;
+      background: transparent;
+      transition: background 0.2s ease;
+  }
 
   /* Tag pill */
   .tag { display:inline-block; font-size:9px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; padding:3px 10px; background:#854300; color:white; }
@@ -282,7 +302,7 @@
 </style>
 </head>
 
-<body class="bg-[#f7fafc] text-primary blueprint-grid">
+<body class="bg-[#f7fafc] text-primary blueprint-grid" ontouchstart="">
 
 <nav class="fixed top-0 w-full z-50 bg-slate-50/95 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
   <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1600px] mx-auto">
@@ -417,7 +437,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Pacora, PA</span>
-          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -436,7 +458,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Panamá</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -455,7 +479,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Ciudad de Panamá</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -474,7 +500,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">public</span>4 Países</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -493,7 +521,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Santa María, PA</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -512,7 +542,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Coclé, Panamá</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -531,7 +563,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">verified</span>NFPA 13, 20, 72</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -550,7 +584,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Panamá</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -569,7 +605,9 @@
         </div>
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">public</span>5 Países</span>
-          <span class="text-xs font-bold text-tertiary-container pointer-events-none">Ver más →</span>
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+            Ver más →
+          </div>
         </div>
       </div>
     </div>
@@ -849,8 +887,13 @@ function openModal(index) {
 
   const modal = document.getElementById('projectModal');
   modal.classList.remove('hidden');
+  modal.style.display = 'flex';
   modal.style.opacity = '0';
-  requestAnimationFrame(() => { modal.style.opacity = '1'; });
+  modal.scrollTop = 0; // Reset scroll position
+  
+  // Force a reflow for animation
+  modal.offsetHeight; 
+  modal.style.opacity = '1';
 }
 
 function closeModal() {
