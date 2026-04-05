@@ -158,14 +158,6 @@
       </a>
     </div>
 
-    <!-- Mobile Hamburger -->
-    <div class="md:hidden">
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
   </div>
 </nav>
 
@@ -229,7 +221,7 @@
           </div>
           <h3 class="text-2xl font-bold mb-3 font-headline leading-tight text-primary">¿Prefieres una consulta rápida por WhatsApp?</h3>
           <p class="text-on-surface-variant text-sm mb-6 leading-relaxed max-w-md">Conecta directamente con nuestra línea técnica para consultas puntuales o urgencias.</p>
-          <a href="https://wa.me/50767346302" target="_blank" class="inline-flex items-center gap-3 bg-tertiary-container text-primary px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all transform hover:-translate-y-1">
+          <a href="https://wa.me/50767346302" target="_blank" class="inline-flex items-center gap-3 bg-tertiary-container text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all transform hover:-translate-y-1">
             INICIAR CHAT
             <span class="material-symbols-outlined text-[18px]">chat</span>
           </a>
@@ -269,6 +261,11 @@
         <!-- Decoration -->
         <div class="absolute -top-12 -right-12 w-48 h-48 bg-tertiary-container/10 rounded-full blur-3xl"></div>
         
+        <div class="relative z-10 mb-12 border-b border-outline-variant/10 pb-8">
+          <h3 class="text-2xl font-bold text-primary font-headline mb-2 uppercase tracking-tight">Solicitar Evaluación Técnica</h3>
+          <p class="text-on-surface-variant text-sm font-body">Iniciemos tu próximo hito. Completa los detalles técnicos para coordinar una respuesta profesional a la brevedad.</p>
+        </div>
+
         <form class="space-y-10 relative z-10" id="contactPageForm">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div class="space-y-3">
@@ -331,33 +328,35 @@
 
 <script>
     // FAB Menu Logic
-    const fabTrigger = document.getElementById('fabTrigger');
-    const fabOptions = document.getElementById('fabOptions');
-    
-    if (fabTrigger && fabOptions) {
-        fabTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            fabTrigger.classList.toggle('active');
-            fabOptions.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            const isTrigger = fabTrigger.contains(e.target);
-            const isOptions = fabOptions.contains(e.target);
-            if (!isTrigger && !isOptions) {
-                fabTrigger.classList.remove('active');
-                fabOptions.classList.remove('active');
-            }
-        });
-
-        fabOptions.querySelectorAll('.fab-option').forEach(opt => {
-            opt.addEventListener('click', () => {
-                fabTrigger.classList.remove('active');
-                fabOptions.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', () => {
+        const fabTrigger = document.getElementById('fabTrigger');
+        const fabOptions = document.getElementById('fabOptions');
+        
+        if (fabTrigger && fabOptions) {
+            fabTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                fabTrigger.classList.toggle('active');
+                fabOptions.classList.toggle('active');
             });
-        });
-    }
+
+            document.addEventListener('click', (e) => {
+                const isTrigger = fabTrigger.contains(e.target);
+                const isOptions = fabOptions.contains(e.target);
+                if (!isTrigger && !isOptions) {
+                    fabTrigger.classList.remove('active');
+                    fabOptions.classList.remove('active');
+                }
+            });
+
+            fabOptions.querySelectorAll('.fab-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    fabTrigger.classList.remove('active');
+                    fabOptions.classList.remove('active');
+                });
+            });
+        }
+    });
 
     // Reveal on scroll
     const observer = new IntersectionObserver((entries) => {

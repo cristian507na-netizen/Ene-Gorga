@@ -236,52 +236,6 @@
     }
   }
 
-  /* Floating Contact Button */
-  .floating-cta {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: #333e50;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-weight: 800;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    box-shadow: 0 8px 20px -5px rgba(0,0,0,0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  .floating-cta:hover {
-    transform: translateY(-4px) scale(1.02);
-    background: #000;
-    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
-  }
-  .floating-cta .pulse {
-    width: 6px;
-    height: 6px;
-    background: #854300;
-    border-radius: 50%;
-    position: relative;
-  }
-  .floating-cta .pulse::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: inherit;
-    border-radius: inherit;
-    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  @keyframes pulse-ring {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(3.5); opacity: 0; }
-  }
 
   /* Innovative Floating Action Menu (FAB) */
   .fab-container {
@@ -400,14 +354,6 @@
       </a>
     </div>
 
-    <!-- Mobile Hamburger -->
-    <div class="md:hidden">
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
   </div>
 </nav>
 
@@ -699,33 +645,37 @@
 
 <script>
   // FAB Menu Logic
-  const fabTrigger = document.getElementById('fabTrigger');
-  const fabOptions = document.getElementById('fabOptions');
-  
-  if (fabTrigger && fabOptions) {
-      fabTrigger.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          fabTrigger.classList.toggle('active');
-          fabOptions.classList.toggle('active');
-      });
+  document.addEventListener('DOMContentLoaded', () => {
+    const fabTrigger = document.getElementById('fabTrigger');
+    const fabOptions = document.getElementById('fabOptions');
+    
+    if (fabTrigger && fabOptions) {
+        fabTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fabTrigger.classList.toggle('active');
+            fabOptions.classList.toggle('active');
+        });
 
-      document.addEventListener('click', (e) => {
-          const isTrigger = fabTrigger.contains(e.target);
-          const isOptions = fabOptions.contains(e.target);
-          if (!isTrigger && !isOptions) {
-              fabTrigger.classList.remove('active');
-              fabOptions.classList.remove('active');
-          }
-      });
+        document.addEventListener('click', (e) => {
+            const isTrigger = fabTrigger.contains(e.target);
+            const isOptions = fabOptions.contains(e.target);
+            if (!isTrigger && !isOptions) {
+                fabTrigger.classList.remove('active');
+                fabOptions.classList.remove('active');
+            }
+        });
 
-      fabOptions.querySelectorAll('.fab-option').forEach(opt => {
-          opt.addEventListener('click', () => {
-              fabTrigger.classList.remove('active');
-              fabOptions.classList.remove('active');
-          });
-      });
-  }
+        fabOptions.querySelectorAll('.fab-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                fabTrigger.classList.remove('active');
+                fabOptions.classList.remove('active');
+            });
+        });
+    }
+  });
+
+  // Floating CTA removal confirmed
 
   // Intersection Observer para reveal
   const observerOptions = { threshold: 0.1 };
@@ -790,13 +740,36 @@
       if (btn) btn.click();
     }
   });
+
+  // FAB Menu Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const fabTrigger = document.getElementById('fabTrigger');
+    const fabOptions = document.getElementById('fabOptions');
+    
+    if (fabTrigger && fabOptions) {
+        fabTrigger.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fabTrigger.classList.toggle('active');
+            fabOptions.classList.toggle('active');
+        };
+
+        document.addEventListener('click', (e) => {
+            if (!fabTrigger.contains(e.target) && !fabOptions.contains(e.target)) {
+                fabTrigger.classList.remove('active');
+                fabOptions.classList.remove('active');
+            }
+        });
+
+        fabOptions.querySelectorAll('.fab-option').forEach(opt => {
+            opt.onclick = () => {
+                fabTrigger.classList.remove('active');
+                fabOptions.classList.remove('active');
+            };
+        });
+    }
+  });
+
 </script>
-
-  <!-- Floating CTA -->
-  <a href="contacto.html" class="floating-cta font-headline">
-    <span class="pulse"></span>
-    Cotizar Proyecto
-  </a>
-
 </body>
 </html>

@@ -426,7 +426,7 @@
         .fab-options.active .fab-option:nth-child(5) { transition-delay: 0.25s; }
 
         .hamburger {
-            display: none !important; /* Hide standard hamburger on mobile if using FAB */
+            display: none !important;
         }
     </style>
 </head>
@@ -453,14 +453,6 @@
       </a>
     </div>
 
-    <!-- Mobile Hamburger -->
-    <div class="md:hidden">
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
   </div>
 </nav>
 
@@ -1043,31 +1035,6 @@
 
     document.addEventListener("DOMContentLoaded", () => {
 
-        // Mobile Menu Logic
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-
-        const toggleMenu = () => {
-            if (hamburger && mobileMenu) {
-                hamburger.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                document.body.classList.toggle('overflow-hidden');
-            }
-        };
-
-        if (hamburger) {
-            hamburger.addEventListener('click', toggleMenu);
-        }
-        
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.classList.remove('overflow-hidden');
-            });
-        });
-
         // ── Carrusel 3D de proyectos ──────────────────────────────────
         const stage       = document.getElementById('projectStage');
         const content     = document.getElementById('projectContent');
@@ -1388,11 +1355,5 @@
         alert('Se abrirá tu gestor de correo para completar el envío. ¡Muchas gracias!');
     }
 </script>
-  <!-- Floating CTA -->
-  <a href="contacto.html" class="floating-cta font-headline">
-    <span class="pulse"></span>
-    Cotizar Proyecto
-  </a>
-
-</body>
+ </body>
 </html>
