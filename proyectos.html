@@ -193,6 +193,94 @@
     animation-play-state: running;
   }
   @keyframes gradient-angle { to { --gradient-angle: 360deg; } }
+
+  /* Innovative Floating Action Menu (FAB) */
+  .fab-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+  }
+  .fab-trigger {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .fab-trigger.active {
+      transform: rotate(45deg);
+      background: #854300;
+  }
+  .fab-options {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      filter: blur(10px);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fab-options.active {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+  }
+  .fab-option {
+      background: rgba(17, 17, 17, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+  }
+  .fab-option:hover {
+      background: rgba(133, 67, 0, 0.9);
+      transform: translateX(-5px);
+  }
+  .fab-option .material-symbols-outlined {
+      font-size: 1.1rem;
+      opacity: 0.8;
+  }
+
+  /* Staggered Entrance */
+  .fab-options.active .fab-option:nth-child(1) { transition-delay: 0.05s; }
+  .fab-options.active .fab-option:nth-child(2) { transition-delay: 0.1s; }
+  .fab-options.active .fab-option:nth-child(3) { transition-delay: 0.15s; }
+  .fab-options.active .fab-option:nth-child(4) { transition-delay: 0.2s; }
+  .fab-options.active .fab-option:nth-child(5) { transition-delay: 0.25s; }
+
+  .hamburger {
+      display: none !important;
+  }
 </style>
 </head>
 
@@ -200,7 +288,9 @@
 
 <nav class="fixed top-0 w-full z-50 bg-slate-50/95 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
   <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1600px] mx-auto">
-    <div class="text-xl font-bold tracking-tighter text-slate-900 font-headline flex-shrink-0">ING. ENE GORGA</div>
+    <div class="text-xl font-bold tracking-tighter text-slate-900 font-headline flex-shrink-0">
+      <a href="index.html">ING. ENE GORGA</a>
+    </div>
     
     <!-- Navigation Links -->
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight">
@@ -220,15 +310,45 @@
       </a>
     </div>
 
-    <!-- Mobile Navigation (Simple Links) -->
-    <div class="flex md:hidden items-center gap-4 font-headline tracking-tighter">
-      <a class="text-[10px] font-bold text-slate-500 uppercase" href="index.html">Inicio</a>
-      <a class="text-[10px] font-bold text-slate-500 uppercase" href="servicios.html">Servicios</a>
-      <a class="text-[10px] font-bold text-slate-900 uppercase" href="proyectos.html">Proyectos</a>
-      <a class="text-[10px] font-bold text-slate-500 uppercase" href="contacto.html">Contacto</a>
+    <!-- Mobile Hamburger -->
+    <div class="md:hidden">
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </div>
 </nav>
+
+<!-- Floating Action Menu (FAB) Mobile Navigation -->
+<div class="fab-container md:hidden">
+  <div class="fab-options" id="fabOptions">
+    <a href="index.html" class="fab-option">
+      <span class="material-symbols-outlined">home</span>
+      <span>Inicio</span>
+    </a>
+    <a href="servicios.html" class="fab-option">
+      <span class="material-symbols-outlined">engineering</span>
+      <span>Servicios</span>
+    </a>
+    <a href="proyectos.html" class="fab-option">
+      <span class="material-symbols-outlined">dataset</span>
+      <span>Proyectos</span>
+    </a>
+    <a href="contacto.html" class="fab-option">
+      <span class="material-symbols-outlined">alternate_email</span>
+      <span>Contacto</span>
+    </a>
+    <a href="contacto.html" class="fab-option" style="background:#854300;">
+      <span class="material-symbols-outlined" style="color:white;">payments</span>
+      <span>Cotizar</span>
+    </a>
+  </div>
+  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
+    <span class="material-symbols-outlined" style="font-size:32px;">add</span>
+  </button>
+</div>
 
 <main class="pt-20">
 
@@ -758,6 +878,37 @@ document.getElementById('filters').addEventListener('click', function(e) {
     const show = filter === 'all' || cats.includes(filter);
     card.style.display = show ? '' : 'none';
   });
+});
+
+// ── FAB Menu Logic ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const fabTrigger = document.getElementById('fabTrigger');
+    const fabOptions = document.getElementById('fabOptions');
+    
+    if (fabTrigger && fabOptions) {
+        fabTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fabTrigger.classList.toggle('active');
+            fabOptions.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            const isTrigger = fabTrigger.contains(e.target);
+            const isOptions = fabOptions.contains(e.target);
+            if (!isTrigger && !isOptions) {
+                fabTrigger.classList.remove('active');
+                fabOptions.classList.remove('active');
+            }
+        });
+
+        fabOptions.querySelectorAll('.fab-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                fabTrigger.classList.remove('active');
+                fabOptions.classList.remove('active');
+            });
+        });
+    }
 });
 
 // ── Reveal on scroll ──────────────────────────────────────────────────

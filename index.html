@@ -340,6 +340,94 @@
             scale: 1.2;
           }
         }
+        /* Innovative Floating Action Menu (FAB) */
+        .fab-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+        }
+        .fab-trigger {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(17, 17, 17, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .fab-trigger.active {
+            transform: rotate(45deg);
+            background: #854300;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fab-options.active {
+            pointer-events: auto;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+        .fab-option {
+            background: rgba(17, 17, 17, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 14px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .fab-option:hover {
+            background: rgba(133, 67, 0, 0.9);
+            transform: translateX(-5px);
+        }
+        .fab-option .material-symbols-outlined {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Staggered Entrance */
+        .fab-options.active .fab-option:nth-child(1) { transition-delay: 0.05s; }
+        .fab-options.active .fab-option:nth-child(2) { transition-delay: 0.1s; }
+        .fab-options.active .fab-option:nth-child(3) { transition-delay: 0.15s; }
+        .fab-options.active .fab-option:nth-child(4) { transition-delay: 0.2s; }
+        .fab-options.active .fab-option:nth-child(5) { transition-delay: 0.25s; }
+
+        .hamburger {
+            display: none !important; /* Hide standard hamburger on mobile if using FAB */
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface">
@@ -365,15 +453,45 @@
       </a>
     </div>
 
-    <!-- Mobile Navigation (Simple Links) -->
-    <div class="flex md:hidden items-center gap-4 font-headline tracking-tighter">
-      <a class="text-[10px] font-bold text-slate-900 uppercase" href="index.html">Inicio</a>
-      <a class="text-[10px] font-bold text-slate-500 uppercase" href="servicios.html">Servicios</a>
-      <a class="text-[10px] font-bold text-slate-500 uppercase" href="proyectos.html">Proyectos</a>
-      <a class="text-[10px] font-bold text-slate-500 uppercase" href="contacto.html">Contacto</a>
+    <!-- Mobile Hamburger -->
+    <div class="md:hidden">
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </div>
 </nav>
+
+<!-- Floating Action Menu (FAB) Mobile Navigation -->
+<div class="fab-container md:hidden">
+  <div class="fab-options" id="fabOptions">
+    <a href="index.html" class="fab-option">
+      <span class="material-symbols-outlined">home</span>
+      <span>Inicio</span>
+    </a>
+    <a href="servicios.html" class="fab-option">
+      <span class="material-symbols-outlined">engineering</span>
+      <span>Servicios</span>
+    </a>
+    <a href="proyectos.html" class="fab-option">
+      <span class="material-symbols-outlined">dataset</span>
+      <span>Proyectos</span>
+    </a>
+    <a href="contacto.html" class="fab-option">
+      <span class="material-symbols-outlined">alternate_email</span>
+      <span>Contacto</span>
+    </a>
+    <a href="contacto.html" class="fab-option" style="background:#854300;">
+      <span class="material-symbols-outlined" style="color:white;">payments</span>
+      <span>Cotizar</span>
+    </a>
+  </div>
+  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
+    <span class="material-symbols-outlined" style="font-size:32px;">add</span>
+  </button>
+</div>
 
 <main class="pt-28 blueprint-grid" id="home">
 <!-- Hero Section — fondo: blueprint-grid SIEMPRE, nunca oscurecer ni reemplazar -->
@@ -510,19 +628,27 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal" style="transition-delay: 200ms;">
       <!-- Beneficio 1 -->
       <div class="p-8 bg-white border border-outline-variant/20 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300">
-        <div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center text-tertiary-container mb-6">
-          <span class="material-symbols-outlined" style="font-size:24px;">verified</span>
+        <div class="flex items-center gap-6">
+          <div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center text-tertiary-container shrink-0">
+            <span class="material-symbols-outlined" style="font-size:24px;">verified</span>
+          </div>
+          <div>
+            <h4 class="font-black text-sm text-primary uppercase tracking-widest mb-1">Expertos Calificados</h4>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Ingeniería especializada con sello de calidad regional y técnica de primer nivel.</p>
+          </div>
         </div>
-        <h4 class="font-black text-sm text-primary uppercase tracking-widest mb-3">Expertos Calificados</h4>
-        <p class="text-xs text-on-surface-variant leading-relaxed">Ingeniería especializada con sello de calidad regional y técnica de primer nivel.</p>
       </div>
       <!-- Beneficio 2 -->
       <div class="p-8 bg-white border border-outline-variant/20 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300">
-        <div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center text-tertiary-container mb-6">
-          <span class="material-symbols-outlined" style="font-size:24px;">schedule</span>
+        <div class="flex items-center gap-6">
+          <div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center text-tertiary-container shrink-0">
+            <span class="material-symbols-outlined" style="font-size:24px;">schedule</span>
+          </div>
+          <div>
+            <h4 class="font-black text-sm text-primary uppercase tracking-widest mb-1">Atención Rápida</h4>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Seguimiento ágil de cronogramas y tiempos de respuesta garantizados en 24h.</p>
+          </div>
         </div>
-        <h4 class="font-black text-sm text-primary uppercase tracking-widest mb-3">Atención Rápida</h4>
-        <p class="text-xs text-on-surface-variant leading-relaxed">Seguimiento ágil de cronogramas y tiempos de respuesta garantizados en 24h.</p>
       </div>
       <!-- Beneficio 3 -->
       <div class="p-8 bg-white border border-outline-variant/20 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 md:col-span-2">
@@ -602,40 +728,33 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:max-w-[66.666%] md:mx-auto">
 
     <!-- Card 4: Revisión de Planos y Cumplimiento Normativo -->
-    <div class="service-card group bg-white border border-outline-variant/20 shadow-sm reveal" style="transition-delay:300ms;">
-      <img src="assets/img/service4.png" class="service-img w-full h-[220px] object-cover" alt="Revisión de Planos y Cumplimiento Normativo">
-      <div class="p-8 space-y-5">
-        <span class="material-symbols-outlined text-tertiary-container" style="font-size:40px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 40;">policy</span>
-        <h3 class="text-xl font-bold text-primary font-headline">Revisión de Planos y Cumplimiento Normativo</h3>
-        <p class="text-sm text-on-surface-variant leading-relaxed">Análisis técnico de juegos de planos para detectar incompatibilidades, deficiencias normativas y gestionar su aprobación ante entidades regulatorias en Panamá.</p>
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Revisión contra normas NFPA e IPC</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Detección de interferencias entre disciplinas</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Correcciones y recomendaciones documentadas</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Gestión de permisos y aprobaciones</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Experiencia con MINSA, bomberos y municipio</li>
-        </ul>
-        <a href="#contact" class="inline-flex items-center gap-1 text-sm font-bold text-tertiary-container group-hover:gap-3 transition-all duration-300">Saber más <span>→</span></a>
+    <div class="service-card group bg-white border border-outline-variant/10 shadow-sm reveal overflow-hidden" style="border-radius:24px; transition-delay:300ms;">
+      <div class="overflow-hidden">
+        <img src="assets/img/service4.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Revisión de Planos">
+      </div>
+      <div class="p-10 space-y-6">
+        <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">
+          <span class="material-symbols-outlined" style="font-size:28px;">policy</span>
+        </div>
+        <h3 class="text-2xl font-bold text-primary font-headline">Revisión de <br>Planos Técnicos</h3>
+        <p class="text-on-surface-variant leading-relaxed text-sm">Análisis normativo NFPA/IPC para detectar interferencias y gestionar aprobaciones oficiales.</p>
+        <a href="servicios.html#diseno" class="flex items-center gap-2 text-xs font-black tracking-widest uppercase text-tertiary-container hover:gap-4 transition-all pt-4">Saber más →</a>
       </div>
     </div>
 
     <!-- Card 5: Energía Solar (Sistemas Fotovoltaicos) -->
-    <div class="service-card group bg-white border border-outline-variant/20 shadow-sm relative reveal" style="transition-delay:400ms;">
-      <!-- Badge -->
-      <div class="absolute top-4 right-4 z-10 px-3 py-1 text-[10px] font-black tracking-widest text-white" style="background-color:#854300;">SERVICIO EN EXPANSIÓN</div>
-      <img src="assets/img/service5.png" class="service-img w-full h-[220px] object-cover" alt="Energía Solar (Sistemas Fotovoltaicos)">
-      <div class="p-8 space-y-5">
-        <span class="material-symbols-outlined text-tertiary-container" style="font-size:40px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 40;">solar_power</span>
-        <h3 class="text-xl font-bold text-primary font-headline">Energía Solar (Sistemas Fotovoltaicos)</h3>
-        <p class="text-sm text-on-surface-variant leading-relaxed">Diseño e integración de sistemas fotovoltaicos para proyectos residenciales y comerciales, optimizando el consumo energético y reduciendo costos operativos a largo plazo.</p>
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Estudio de carga y dimensionamiento del sistema</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Selección de equipos y paneles</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Diseño eléctrico del sistema FV</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Coordinación con empresa distribuidora</li>
-          <li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="w-1.5 h-1.5 bg-tertiary-container rounded-full mt-1.5 flex-shrink-0"></span>Integración con instalaciones existentes</li>
-        </ul>
-        <a href="#contact" class="inline-flex items-center gap-1 text-sm font-bold text-tertiary-container group-hover:gap-3 transition-all duration-300">Saber más <span>→</span></a>
+    <div class="service-card group bg-white border border-outline-variant/10 shadow-sm relative reveal overflow-hidden" style="border-radius:24px; transition-delay:400ms;">
+      <div class="absolute top-6 right-6 z-10 px-4 py-1.5 text-[10px] font-black tracking-widest text-white shadow-lg" style="background-color:#854300;border-radius:2px;">SERVICIO EN EXPANSIÓN</div>
+      <div class="overflow-hidden">
+        <img src="assets/img/service5.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Energía Solar">
+      </div>
+      <div class="p-10 space-y-6">
+        <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">
+          <span class="material-symbols-outlined" style="font-size:28px;">solar_power</span>
+        </div>
+        <h3 class="text-2xl font-bold text-primary font-headline">Energía Solar <br>Fotovoltaica</h3>
+        <p class="text-on-surface-variant leading-relaxed text-sm">Diseño e integración de sistemas fotovoltaicos para optimización energética y reducción de costos.</p>
+        <a href="servicios.html#diseno" class="flex items-center gap-2 text-xs font-black tracking-widest uppercase text-tertiary-container hover:gap-4 transition-all pt-4">Saber más →</a>
       </div>
     </div>
 
@@ -924,6 +1043,31 @@
 
     document.addEventListener("DOMContentLoaded", () => {
 
+        // Mobile Menu Logic
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        const toggleMenu = () => {
+            if (hamburger && mobileMenu) {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.classList.toggle('overflow-hidden');
+            }
+        };
+
+        if (hamburger) {
+            hamburger.addEventListener('click', toggleMenu);
+        }
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
+            });
+        });
+
         // ── Carrusel 3D de proyectos ──────────────────────────────────
         const stage       = document.getElementById('projectStage');
         const content     = document.getElementById('projectContent');
@@ -1197,6 +1341,35 @@
             blurTextObserver.observe(el);
         });
 
+        // Innovative Floating Action Menu (FAB) Menu Logic
+        const fabTrigger = document.getElementById('fabTrigger');
+        const fabOptions = document.getElementById('fabOptions');
+        
+        if (fabTrigger && fabOptions) {
+            fabTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                fabTrigger.classList.toggle('active');
+                fabOptions.classList.toggle('active');
+            });
+
+            // Close FAB when clicking outside or on an option
+            document.addEventListener('click', (e) => {
+                const isTrigger = fabTrigger.contains(e.target);
+                const isOptions = fabOptions.contains(e.target);
+                if (!isTrigger && !isOptions) {
+                    fabTrigger.classList.remove('active');
+                    fabOptions.classList.remove('active');
+                }
+            });
+
+            fabOptions.querySelectorAll('.fab-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    fabTrigger.classList.remove('active');
+                    fabOptions.classList.remove('active');
+                });
+            });
+        }
     });
 
     function handleFormSubmit(e) {
