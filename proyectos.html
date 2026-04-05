@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es-PA">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Proyectos | Ing. Ene Gorga — Ingeniería Electromecánica en Panamá</title>
+<meta name="description" content="Portafolio de proyectos electromecánicos en Panamá y Latinoamérica. CEDI Grupo Rey, Templos SUD, The Woods Santa María y más. Más de 25 proyectos en 5 países."/>
+<link rel="canonical" href="https://enegorga.com/proyectos/"/>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#333e50",
+          "primary-container": "#4a5568",
+          "tertiary-container": "#854300",
+          "tertiary": "#633000",
+          "on-surface-variant": "#44474c",
+          "outline-variant": "#c5c6cd",
+          "surface-container-high": "#e5e9eb",
+          "surface-container-highest": "#e0e3e5",
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Manrope"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Manrope', sans-serif; }
+  h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; }
+
+  /* Blueprint grid — SIEMPRE presente */
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(117,119,125,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(117,119,125,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Reveal */
+  .reveal { opacity:0; transform:translateY(24px); transition:all 0.7s cubic-bezier(0.5,0,0,1); }
+  .reveal.revealed { opacity:1; transform:translateY(0); }
+
+  /* Project card */
+  .proj-card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  .proj-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.12); transform: translateY(-4px); }
+  .proj-card .proj-img { transition: transform 0.5s ease; }
+  .proj-card:hover .proj-img { transform: scale(1.04); }
+
+  /* Tag pill */
+  .tag { display:inline-block; font-size:9px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; padding:3px 10px; background:#854300; color:white; }
+
+  /* Filter buttons */
+  .filter-btn { transition: all 0.2s ease; }
+  .filter-btn.active { background:#333e50; color:white; }
+
+  /* Stat counter */
+  @keyframes countUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .stat-value { animation: countUp 0.6s ease both; }
+
+  /* Word blur in */
+  @keyframes wordBlurIn {
+    from { filter:blur(8px); opacity:0; transform:translateY(4px); }
+    to   { filter:blur(0);   opacity:1; transform:translateY(0); }
+  }
+
+  /* Modal */
+  #projectModal.hidden { pointer-events:none; }
+
+  /* Floating Contact Button */
+  .floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #333e50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px -5px rgba(0,0,0,0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .floating-cta:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: #000;
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
+  }
+  .floating-cta .pulse {
+    width: 6px;
+    height: 6px;
+    background: #854300;
+    border-radius: 50%;
+    position: relative;
+  }
+  .floating-cta .pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    border-radius: inherit;
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3.5); opacity: 0; }
+  }
+</style>
+</head>
+
+<body class="bg-[#f7fafc] text-primary blueprint-grid">
+
+<!-- Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/95 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-4 md:px-8 py-3 md:py-4 max-w-full mx-auto gap-2 md:gap-0">
+    <a href="index.html" class="text-lg md:text-xl font-bold tracking-tighter text-slate-900 font-headline">ING. ENE GORGA</a>
+    <div class="flex items-center gap-4 md:gap-8 font-headline tracking-tight">
+      <a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="index.html">Inicio</a>
+      <a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="servicios.html">Servicios</a>
+      <a class="text-slate-900 border-b-2 border-tertiary-container pb-0.5 text-[10px] md:text-sm font-bold" href="proyectos.html">Proyectos</a>
+      <a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="contacto.html">Contacto</a>
+    </div>
+    <a href="contacto.html" class="hidden md:inline-block bg-tertiary-container text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:brightness-110 transition-all">
+      COTIZAR PROYECTO
+    </a>
+  </div>
+</nav>
+
+<main class="pt-20">
+
+<!-- ── HERO DE PÁGINA ────────────────────────────────────────────── -->
+<section class="px-8 md:px-20 pt-24 pb-16 max-w-[1600px] mx-auto reveal">
+  <div class="max-w-3xl">
+    <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-high text-[10px] font-bold tracking-[0.25em] uppercase mb-8 text-primary" style="border-radius:999px;">
+      <span class="w-1.5 h-1.5 rounded-full bg-tertiary-container flex-shrink-0"></span>
+      Portafolio Técnico · Panamá y Latinoamérica
+    </div>
+    <h1 class="text-5xl md:text-7xl font-bold leading-[1.02] tracking-tighter text-primary mb-6">
+      Proyectos que<br><span class="text-tertiary-container">respaldan mi trabajo</span>
+    </h1>
+    <div class="w-14 h-0.5 bg-tertiary-container mb-6"></div>
+    <p class="text-on-surface-variant text-lg max-w-xl leading-relaxed font-body">
+      Más de 25 proyectos en Panamá y 4 países de la región — desde 40 m² hasta instalaciones industriales de más de 6 hectáreas, con estricto cumplimiento NFPA, IPC y NEC.
+    </p>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="flex flex-wrap gap-12 mt-16 pt-10 border-t border-outline-variant/20">
+    <div class="stat-value">
+      <div class="text-4xl font-bold font-headline text-primary">25+</div>
+      <div class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-1">Proyectos</div>
+    </div>
+    <div class="stat-value" style="animation-delay:.1s">
+      <div class="text-4xl font-bold font-headline text-primary">5</div>
+      <div class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-1">Países</div>
+    </div>
+    <div class="stat-value" style="animation-delay:.2s">
+      <div class="text-4xl font-bold font-headline text-primary">8+</div>
+      <div class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-1">Años Exp.</div>
+    </div>
+    <div class="stat-value" style="animation-delay:.3s">
+      <div class="text-4xl font-bold font-headline text-primary">$80M+</div>
+      <div class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-1">En valor de proyectos</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILTROS ─────────────────────────────────────────────────────── -->
+<section class="px-8 md:px-20 pb-6 max-w-[1600px] mx-auto reveal">
+  <div class="flex flex-wrap gap-2" id="filters">
+    <button class="filter-btn active px-5 py-2 text-xs font-bold tracking-widest uppercase border border-primary/20 transition-all" data-filter="all">Todos</button>
+    <button class="filter-btn px-5 py-2 text-xs font-bold tracking-widest uppercase border border-primary/20 text-on-surface-variant transition-all" data-filter="industrial">Industrial</button>
+    <button class="filter-btn px-5 py-2 text-xs font-bold tracking-widest uppercase border border-primary/20 text-on-surface-variant transition-all" data-filter="comercial">Comercial</button>
+    <button class="filter-btn px-5 py-2 text-xs font-bold tracking-widest uppercase border border-primary/20 text-on-surface-variant transition-all" data-filter="residencial">Residencial</button>
+    <button class="filter-btn px-5 py-2 text-xs font-bold tracking-widest uppercase border border-primary/20 text-on-surface-variant transition-all" data-filter="internacional">Internacional</button>
+    <button class="filter-btn px-5 py-2 text-xs font-bold tracking-widest uppercase border border-primary/20 text-on-surface-variant transition-all" data-filter="inspeccion">Inspección</button>
+  </div>
+</section>
+
+<!-- ── GRID DE PROYECTOS ───────────────────────────────────────────── -->
+<section class="p-8 md:p-20 pb-32 max-w-[1600px] mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+
+    <!-- CARD 1: CEDI Grupo Rey -->
+    <div class="proj-card reveal" data-category="industrial" onclick="openModal(0)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/cedi.png" class="proj-img w-full object-cover" style="height:220px;" alt="CEDI Grupo Rey">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Industrial · Destacado</span>
+          <h3 class="text-xl font-bold text-primary font-headline">CEDI Grupo Rey</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Construcción)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Centro de distribución logístico con inversión superior a $80 millones.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Pacora, PA</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Supermercados Rey -->
+    <div class="proj-card reveal" data-category="comercial" onclick="openModal(1)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/supermercados.png" class="proj-img w-full object-cover" style="height:220px;" alt="Supermercados Rey">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Retail · Nacional</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Supermercados Rey, Mr. Precio y ZAZ</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Diseño y Construcción)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Diseño y construcción de múltiples locales a nivel nacional.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Panamá</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: Sede Regional CAF -->
+    <div class="proj-card reveal" data-category="comercial corporativo" onclick="openModal(2)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/caf.png" class="proj-img w-full object-cover" style="height:220px;" alt="Sede Regional CAF">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Corporativo</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Sede Regional CAF</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Desarrollo)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Sede Northern Region (CAF). Desarrollo técnico de alto nivel.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Ciudad de Panamá</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: Templos SUD -->
+    <div class="proj-card reveal" data-category="internacional" onclick="openModal(3)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/templo_sud.png" class="proj-img w-full object-cover" style="height:220px;" alt="Templos SUD Latinoamérica">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Internacional · Religioso</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Templos de La Iglesia de Jesucristo</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Diseño y Especificaciones)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Ingeniería electromecánica para templos en 4 países de LATAM.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">public</span>4 Países</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5: The Woods Santa María -->
+    <div class="proj-card reveal" data-category="residencial inspeccion" onclick="openModal(4)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/thewoods.png" class="proj-img w-full object-cover" style="height:220px;" alt="The Woods Santa María">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Residencial Premium</span>
+          <h3 class="text-xl font-bold text-primary font-headline">The Woods – Santa María</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Inspección Club House)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Inspección técnica del Club House en prestigioso proyecto.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Santa María, PA</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6: Casas Buenaventura -->
+    <div class="proj-card reveal" data-category="residencial inspeccion" onclick="openModal(6)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/buenaventura.jpg" class="proj-img w-full object-cover" style="height:220px;" alt="Casas Buenaventura">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Residencial · Inspección</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Casas Buenaventura</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Inspección Técnica)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Inspección técnica de viviendas para certificación y entrega.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Coclé, Panamá</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline link-prevent">Ver más →</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CARD 7: Inspección PH Bomberos -->
+    <div class="proj-card reveal" data-category="residencial inspeccion" onclick="openModal(7)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/ph_bomberos.png" class="proj-img w-full object-cover" style="height:220px;" alt="Inspección PH Bomberos">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Normativo · PH</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Recepción Bomberos PH</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Inspección Técnica)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Inspección técnica integral bajo estricta normativa NFPA.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">verified</span>NFPA 13, 20, 72</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline link-prevent">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 8: Industrias Lácteas -->
+    <div class="proj-card reveal" data-category="industrial" onclick="openModal(8)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/lacteas.png" class="proj-img w-full object-cover" style="height:220px;" alt="Industrias Lácteas">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Agroindustrial</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Industrias Lácteas y Establos</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Revisión de Planos)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Revisión normativa de planos para instalaciones de producción lechera y establos.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Panamá</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 9: Presencia Regional -->
+    <div class="proj-card reveal" data-category="internacional" onclick="openModal(9)">
+      <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
+        <img src="assets/img/regional.png" class="proj-img w-full object-cover" style="height:220px;" alt="Alcance Regional">
+      </div>
+      <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
+        <div>
+          <span class="tag mb-2 inline-block">Alcance Internacional</span>
+          <h3 class="text-xl font-bold text-primary font-headline">Presencia en 5 países</h3>
+          <p class="text-xs text-on-surface-variant mb-3">(Ingeniería Regional)</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed font-body">Más de 25 proyectos ejecutados en Centro y Sudamérica.</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+          <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">public</span>5 Países</span>
+          <button class="text-xs font-bold text-tertiary-container hover:underline link-prevent">Ver más →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── MODAL DE PROYECTO ───────────────────────────────────────────── -->
+<div id="projectModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);">
+  <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto" style="background:white;border-radius:12px;">
+    <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center hover:bg-surface-container-high transition-colors" style="border-radius:50%;border:none;cursor:pointer;background:#f1f4f6;">
+      <span class="material-symbols-outlined text-primary" style="font-size:18px;">close</span>
+    </button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ── CTA FOOTER ─────────────────────────────────────────────────── -->
+<section class="px-8 md:px-20 py-24 border-t border-outline-variant/15 blueprint-grid">
+  <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-10 reveal">
+    <div>
+      <span class="text-xs font-black tracking-[0.3em] uppercase text-tertiary-container block mb-3">¿Tienes un proyecto?</span>
+      <h2 class="text-4xl font-bold tracking-tighter text-primary font-headline">Hablemos antes de que<br>cueste más no hablar.</h2>
+    </div>
+    <div class="flex flex-col gap-4 text-center flex-shrink-0">
+      <a href="index.html#contact" class="inline-flex items-center gap-3 px-10 py-5 text-sm font-bold tracking-widest uppercase text-white hover:brightness-110 transition-all" style="background:#854300;">
+        COTIZAR PROYECTO
+        <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+      </a>
+      <a href="https://wa.me/50760000000?text=Hola%20Ing.%20Gorga,%20vi%20su%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20de%20un%20proyecto." target="_blank" class="inline-flex items-center justify-center gap-2 px-10 py-4 text-sm font-bold tracking-widest uppercase border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.066.376-.05.398-.465.511-.624c.113-.156.226-.13.39-.069.164.06 1.028.485 1.201.57.174.087.289.13.332.202.043.073.043.423-.101.827z"/><path d="M22.5 12.5c0-5.799-4.701-10.5-10.5-10.5h-.032C6.168 2 1.5 6.701 1.5 12.5c0 1.912.512 3.712 1.411 5.253L1.5 22.5l4.896-1.332c1.517.842 3.255 1.332 5.072 1.332h.031C17.299 22.5 22.5 17.799 22.5 12.5zm-10.531 8.5h-.028c-1.637 0-3.21-.453-4.577-1.309l-.328-.205-3.4.922.909-3.32-.224-.356A8.471 8.471 0 013.5 12.5c0-4.686 3.814-8.5 8.5-8.5 4.687 0 8.5 3.815 8.5 8.5s-3.814 8.5-8.469 8.5z"/></svg>
+        WHATSAPP
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="blueprint-grid flex flex-col md:flex-row justify-between items-center w-full px-12 py-12 gap-8 border-t border-outline-variant/15">
+  <div class="space-y-2 text-center md:text-left">
+    <div class="text-lg font-black text-slate-900 font-headline">ING. ENE GORGA</div>
+    <p class="uppercase tracking-widest text-[10px] text-slate-500">© 2026 ING. ENE GORGA · INGENIERÍA ELECTROMECÁNICA · PANAMÁ</p>
+  </div>
+  <div class="flex gap-6 text-xs font-bold tracking-widest uppercase text-slate-500">
+    <a href="index.html" class="hover:text-primary transition-colors">Inicio</a>
+    <a href="proyectos.html" class="hover:text-primary transition-colors">Proyectos</a>
+    <a href="contacto.html" class="hover:text-primary transition-colors">Contacto</a>
+  </div>
+</footer>
+
+
+<script>
+// ── Datos completos para modales ─────────────────────────────────────
+const PROJECTS = [
+  {
+    id: 1, category: "Industrial",
+    name: "CEDI Grupo Rey",
+    role: "Construcción",
+    location: "Pacora, Panamá",
+    detail: "Centro de distribución logístico con inversión superior a $80 millones. El proyecto industrial más grande de su tipo.",
+    img: "assets/img/cedi.png",
+    link: "https://gruporey.com.pa/cedi/"
+  },
+  {
+    id: 2, category: "Retail / Comercial",
+    name: "Supermercados Rey, Farmacias y ZAZ",
+    role: "Diseño y Construcción",
+    location: "Nacional, Panamá",
+    detail: "Diseño electromecánico y construcción de múltiples locales a nivel nacional para Grupo Rey.",
+    img: "assets/img/supermercados.png",
+    link: "https://gruporey.com.pa/mr-precio/"
+  },
+  {
+    id: 3, category: "Residencial Premium",
+    name: "The Woods – Santa María",
+    role: "Inspección",
+    location: "Santa María, Panamá",
+    detail: "Inspección técnica del Club House en exclusivo proyecto residencial de lujo.",
+    img: "assets/img/thewoods.png",
+    link: "https://thewoodssantamaria.com/"
+  },
+  {
+    id: 4, category: "Corporativo",
+    name: "Sede Regional CAF",
+    role: "Desarrollo",
+    location: "Ciudad de Panamá",
+    detail: "Sede de la Corporación Andina de Fomento. Proyecto arquitectónico y técnico de alto nivel.",
+    img: "assets/img/caf.png",
+    link: "https://mallolarquitectos.com/work/caf-northern-region-headquarters/"
+  },
+  {
+    id: 5, category: "Internacional",
+    name: "Templos SUD",
+    role: "Diseño y Especificaciones",
+    location: "Región LATAM",
+    detail: "Diseño electromecánico para templos en Puebla, Antofagasta, Guatemala y Nicaragua.",
+    img: "assets/img/templo_sud.png",
+    link: "https://es.thechurchnews.com/templos/2024/03/26/templo-puebla-mexico-dia-de-medios-de-comunicacion-casa-abierta-fotos/"
+  },
+  {
+    id: 6, category: "Residencial",
+    name: "Casas Buenaventura",
+    role: "Inspección",
+    location: "Península, Panamá",
+    detail: "Inspección técnica de viviendas de lujo para entrega con estándares de alta calidad.",
+    img: "assets/img/buenaventura.jpg",
+    link: "https://buenaventura.com.pa/real-estate/peninsula-sur/"
+  },
+  {
+    id: 7, category: "Normativo / PH",
+    name: "Recepción Bomberos PH",
+    role: "Inspección Técnica",
+    location: "Panamá",
+    detail: "Certificación de sistemas contra incendio y eléctricos para seguridad humana en PH.",
+    img: "assets/img/ph_bomberos.png",
+    link: null
+  },
+  {
+    id: 8, category: "Agroindustrial",
+    name: "Industrias Lácteas y Establos",
+    role: "Revisión de Planos",
+    location: "Panamá",
+    detail: "Revisión de planos normativos para instalaciones de producción lechera y establos.",
+    img: "assets/img/lacteas.png",
+    link: null
+  },
+  {
+    id: 9, category: "Internacional",
+    name: "Presencia Regional",
+    role: "Ingeniería Multidisciplinaria",
+    location: "5 Países",
+    detail: "Cumplimiento normativo NFPA, IPC y ASHRAE en toda Centro y Sudamérica.",
+    img: "assets/img/regional.png",
+    link: null
+  },
+];
+
+const MODAL_DATA = [
+  {
+    tag: "Industrial · Destacado",
+    name: "CEDI Grupo Rey",
+    role: "Construcción Electromecánica",
+    location: "Pacora, Panamá",
+    link: "https://gruporey.com.pa/cedi/",
+    linkLabel: "gruporey.com.pa/cedi",
+    body: `<p>Centro de distribución logístico de última generación inaugurado en 2022. El proyecto representa la inversión privada más significativa del portafolio, con más de $80 millones de dólares.</p>
+           <ul><li>Diseño e instalación de sistemas eléctricos de alta capacidad</li><li>Sistemas HVAC para control de temperatura en cámaras frías</li><li>Redes de plomería y supresión de incendios bajo NFPA 13 y 20</li><li>Coordinación con más de 1,200 trabajadores en obra</li></ul>`,
+    stats: [["$80M+","Inversión"],["1,200+","Empleos en construcción"],["400+","Empleos permanentes"],["6+ ha","Superficie"]],
+  },
+  {
+    tag: "Retail · Nacional",
+    name: "Supermercados Rey, Mr. Precio y Metro Plus",
+    role: "Diseño y Construcción",
+    location: "Nacional, Panamá",
+    link: "https://gruporey.com.pa/mr-precio/",
+    linkLabel: "gruporey.com.pa",
+    body: `<p>Diseño electromecánico y construcción en múltiples locales del grupo retail más grande de Panamá. Proyectos de remodelación y obra nueva en distintos formatos comerciales a lo largo del país.</p>
+           <ul><li>Diseño eléctrico bajo NEC para alta carga comercial</li><li>Sistemas de climatización ASHRAE para retail</li><li>Redes sanitarias y plomería IPC</li><li>Estandarización de sistemas entre formatos</li></ul>`,
+    stats: [["25+","Locales Mr. Precio"],["6,197 m²","Área retail"],["4.2M+","Transacciones anuales"],["Nacional","Cobertura"]],
+  },
+  {
+    tag: "Retail · Salud",
+    name: "Farmacias Metro, ZAZ y Farma Ahorro",
+    role: "Diseño y Construcción",
+    location: "Nacional, Panamá",
+    link: "https://gruporey.com.pa/zaz/",
+    linkLabel: "gruporey.com.pa/zaz",
+    body: `<p>Estandarización e implementación de sistemas electromecánicos en la red de farmacias y tiendas de conveniencia de Grupo Rey, garantizando cumplimiento normativo y eficiencia operativa en todos los locales.</p>
+           <ul><li>Diseño eléctrico para locales comerciales de salud</li><li>Climatización eficiente para conservación de medicamentos</li><li>Redes contra incendio según normativa NFPA</li><li>Documentación para permisos sanitarios y municipales</li></ul>`,
+    stats: [["3","Formatos de farmacia"],["Nacional","Cobertura Panamá"],["NFPA","Cumplimiento"],["IPC","Código plomería"]],
+  },
+  {
+    tag: "Internacional · Religioso",
+    name: "Templos de La Iglesia de Jesucristo de los Santos de los Últimos Días",
+    role: "Diseño y Especificaciones Electromecánicas",
+    location: "Guatemala · México · Chile · Nicaragua",
+    link: "https://www.churchofjesuschrist.org/temples/details/antofagasta-chile-temple?lang=spa",
+    linkLabel: "churchofjesuschrist.org",
+    body: `<p>Diseño electromecánico y especificaciones técnicas para templos sagrados en cuatro países de Latinoamérica. Proyectos de alta complejidad con estándares internacionales, requiriendo adaptación a las normativas locales de cada país.</p>
+           <ul><li>Diseño de sistemas eléctricos de baja y media tensión</li><li>Especificaciones HVAC para control climático de recintos sagrados</li><li>Sistemas de protección contra incendios (NFPA 13, 20, 72)</li><li>Coordinación con equipos de diseño internacionales</li><li>Adaptación a normativas de 4 países distintos</li></ul>`,
+    stats: [["4","Países"],["100%","Estándares NFPA"],["3,331 m²","Templo Puebla MX"],["34 m","Altura con aguja"]],
+  },
+  {
+    tag: "Residencial Premium",
+    name: "The Woods – Santa María (Club House)",
+    role: "Inspección Técnica Electromecánica",
+    location: "Santa María, Ciudad de Panamá",
+    link: "https://thewoodssantamaria.com/",
+    linkLabel: "thewoodssantamaria.com",
+    body: `<p>Inspección técnica completa del Club House en uno de los proyectos residenciales de mayor lujo de Ciudad de Panamá. Verificación de todos los sistemas instalados previo a la entrega y recepción oficial.</p>
+           <ul><li>Inspección de sistemas eléctricos (NFPA 70 / NEC)</li><li>Verificación de sistemas HVAC y climatización</li><li>Inspección de redes de plomería y supresión de incendios</li><li>Informe técnico con fotografías para expediente de entrega</li></ul>`,
+    stats: [["318–412 m²","Unidades residenciales"],["Lujo","Segmento"],["Santa María","Ubicación"],["NFPA","Cumplimiento"]],
+  },
+  {
+    tag: "Industrial",
+    name: "Galeras Industriales Grupo Rey",
+    role: "Construcción Electromecánica",
+    location: "Panamá",
+    link: "https://gruporey.com.pa/cedi/",
+    linkLabel: "gruporey.com.pa",
+    body: `<p>Construcción de los sistemas electromecánicos en naves industriales destinadas a operaciones logísticas y almacenamiento del grupo retail más grande de Panamá.</p>
+           <ul><li>Instalación de sistemas eléctricos industriales de alta carga</li><li>Sistemas de ventilación mecánica forzada</li><li>Redes contra incendios NFPA para naves industriales</li><li>Supervisión de ejecución en campo y control de calidad</li></ul>`,
+    stats: [["Industrial","Categoría"],["Alta carga","Eléctrica"],["NFPA 13","Incendios"],["Panamá","Ubicación"]],
+  },
+  {
+    tag: "Residencial · Inspección",
+    name: "Casas Bienventura – Península",
+    role: "Inspección Técnica",
+    location: "Península, Panamá",
+    link: "https://buenaventura.com.pa/real-estate/peninsula-sur/",
+    linkLabel: "buenaventura.com.pa",
+    body: `<p>Inspección técnica de unidades residenciales en el proyecto Casas Bienventura para su certificación y entrega formal a propietarios. Verificación integral de todos los sistemas instalados.</p>
+           <ul><li>Inspección de sistemas eléctricos residenciales (NEC)</li><li>Verificación de plomería e instalaciones sanitarias (IPC)</li><li>Comprobación de sistemas de climatización</li><li>Elaboración de informe técnico con observaciones y recomendaciones</li></ul>`,
+    stats: [["Residencial","Tipo"],["Península","Zona"],["NEC · IPC","Normativas"],["Entrega","Certificación"]],
+  },
+  {
+    tag: "Residencial · NFPA",
+    name: "Inspección Apartamentos PH – Recepción Bomberos",
+    role: "Inspección Técnica Oficial",
+    location: "Ciudad de Panamá",
+    link: "index.html#contact",
+    linkLabel: "Consultar disponibilidad",
+    body: `<p>Inspección técnica integral de pisos penthouse y sistemas del edificio para la recepción oficial del Cuerpo de Bomberos de Panamá. Un proceso crítico que requiere precisión y conocimiento normativo actualizado.</p>
+           <ul><li>Verificación de rociadores automáticos (NFPA 13)</li><li>Inspección de sistemas de detección de humo y alarmas (NFPA 72)</li><li>Comprobación de bombas contra incendio (NFPA 20)</li><li>Inspección eléctrica general del edificio</li><li>Gestión del proceso ante el Cuerpo de Bomberos</li></ul>`,
+    stats: [["NFPA 13","Rociadores"],["NFPA 72","Detección"],["NFPA 20","Bombas"],["Bomberos","Aprobación"]],
+  },
+  {
+    tag: "Industrial · Agroindustrial",
+    name: "Galeras Industrias Lácteas y Establos de Vacas",
+    role: "Revisión de Planos",
+    location: "Panamá",
+    link: "index.html#contact",
+    linkLabel: "Consultar",
+    body: `<p>Revisión normativa y técnica de juegos de planos electromecánicos para instalaciones de producción láctea y establos. Verificación de compatibilidad entre disciplinas y cumplimiento de códigos aplicables.</p>
+           <ul><li>Revisión de planos eléctricos contra normativa NEC</li><li>Verificación de redes de plomería bajo IPC</li><li>Detección de interferencias entre disciplinas</li><li>Correcciones documentadas con recomendaciones técnicas</li><li>Coordinación para aprobaciones ante MINSA y municipio</li></ul>`,
+    stats: [["NEC · IPC","Normativas"],["Agroindustrial","Sector"],["MINSA","Aprobación"],["Panamá","Ubicación"]],
+  },
+];
+
+// ── Modal ─────────────────────────────────────────────────────────────
+function openModal(index) {
+  const d = MODAL_DATA[index];
+  if (!d) return;
+  const statsHtml = d.stats.map(([v, l]) =>
+    `<div class="text-center"><div class="text-2xl font-bold font-headline" style="color:#333e50;">${v}</div><div class="text-[10px] uppercase tracking-widest mt-1" style="color:#75777d;">${l}</div></div>`
+  ).join('');
+  const listItems = d.body.match(/<li>(.*?)<\/li>/g) || [];
+  const listsHtml = listItems.map(li =>
+    `<li class="flex items-start gap-2 text-sm" style="color:#44474c;font-family:'Manrope',sans-serif;"><span style="width:6px;height:6px;border-radius:50%;background:#854300;margin-top:6px;flex-shrink:0;"></span>${li.replace(/<\/?li>/g,'')}</li>`
+  ).join('');
+  const intro = d.body.match(/<p>(.*?)<\/p>/)?.[1] || '';
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="p-8 md:p-10">
+      <div class="mb-6">
+        <span style="font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;background:#854300;color:white;padding:3px 10px;display:inline-block;">${d.tag}</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tighter mt-3 mb-1 font-headline" style="color:#333e50;">${d.name}</h2>
+        <p style="font-size:13px;color:#75777d;font-family:'Manrope',sans-serif;">${d.role}</p>
+      </div>
+      <p class="text-sm leading-relaxed mb-6" style="color:#44474c;font-family:'Manrope',sans-serif;">${intro}</p>
+      <ul class="space-y-3 mb-8">${listsHtml}</ul>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 mb-6" style="background:#f7fafc;border-radius:8px;">${statsHtml}</div>
+      <div class="flex flex-wrap items-center gap-4 pt-4" style="border-top:1px solid #e5e9eb;">
+        <div class="flex items-center gap-1 text-xs font-bold" style="color:#854300;">
+          <span class="material-symbols-outlined" style="font-size:14px;">location_on</span>${d.location}
+        </div>
+        <a href="${d.link}" target="_blank" rel="noopener" class="flex items-center gap-1 text-xs font-bold hover:underline ml-auto" style="color:#854300;">
+          <span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span>${d.linkLabel}
+        </a>
+        <a href="index.html#contact" class="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-widest uppercase text-white hover:brightness-110 transition-all" style="background:#333e50;">
+          COTIZAR SIMILAR
+        </a>
+      </div>
+    </div>`;
+
+  const modal = document.getElementById('projectModal');
+  modal.classList.remove('hidden');
+  modal.style.opacity = '0';
+  requestAnimationFrame(() => { modal.style.opacity = '1'; });
+}
+
+function closeModal() {
+  const modal = document.getElementById('projectModal');
+  modal.style.opacity = '0';
+  setTimeout(() => modal.classList.add('hidden'), 300);
+}
+
+document.getElementById('projectModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Filtros ───────────────────────────────────────────────────────────
+document.getElementById('filters').addEventListener('click', function(e) {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filter = btn.dataset.filter;
+  document.querySelectorAll('#projectsGrid > [data-category]').forEach(card => {
+    const cats = card.dataset.category || '';
+    const show = filter === 'all' || cats.includes(filter);
+    card.style.display = show ? '' : 'none';
+  });
+});
+
+// ── Reveal on scroll ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('revealed'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+</script>
+  <!-- Floating CTA -->
+  <a href="contacto.html" class="floating-cta font-headline">
+    <span class="pulse"></span>
+    Cotizar Proyecto
+  </a>
+
+</body>
+</html>

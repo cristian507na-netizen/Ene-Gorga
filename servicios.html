@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es-PA">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Servicios Especializados | Ing. Ene Gorga — Ingeniería Electromecánica en Panamá</title>
+<meta name="description" content="Desglose detallado de servicios de ingeniería: diseño HVAC, planos eléctricos, inspección técnica, sistemas fotovoltaicos y trámites municipales en Panamá."/>
+<link rel="canonical" href="https://enegorga.com/servicios/"/>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#333e50",
+          "primary-container": "#4a5568",
+          "tertiary-container": "#854300",
+          "tertiary": "#633000",
+          "on-surface-variant": "#44474c",
+          "outline-variant": "#c5c6cd",
+          "surface-container-high": "#e5e9eb",
+          "surface-container-highest": "#e0e3e5",
+          "background": "#f7fafc",
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Manrope"],
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  body { font-family: 'Manrope', sans-serif; }
+  h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; }
+
+  /* Blueprint grid — SIEMPRE presente */
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(117,119,125,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(117,119,125,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Tab System Styles — Visibilidad Absoluta */
+  .tab-content {
+    display: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  .tab-content.active {
+    display: block !important;
+  }
+
+  /* Service Detail Card */
+  .detail-card {
+    background: white;
+    border: 1px solid rgba(197, 198, 205, 0.2);
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  .detail-card:hover {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+
+  /* Reveal Global (excepto para pestañas) */
+  .reveal:not(.tab-content) { opacity:0; transform:translateY(24px); transition:all 0.7s cubic-bezier(0.5,0,0,1); }
+  .reveal.revealed { opacity:1 !important; transform:translateY(0) !important; }
+
+  /* Sidebar Nav Fixed on Scroll */
+  .sidebar-link {
+    transition: all 0.3s ease;
+    border-left: 2px solid transparent;
+  }
+  .sidebar-link.active {
+    border-left-color: #854300;
+    color: #333e50;
+    font-weight: 700;
+    padding-left: 1.5rem;
+    background: rgba(133,67,0,0.05);
+  }
+  /* Accordion styles */
+  .service-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  }
+  .service-details.expanded {
+    max-height: 2000px;
+    transition: max-height 1s ease-in-out;
+  }
+  .expand-btn .material-symbols-outlined {
+    transition: transform 0.3s ease;
+  }
+  .expand-btn.active .material-symbols-outlined {
+    transform: rotate(180deg);
+  }
+
+  /* Tab System Styles */
+  .tab-content {
+    display: none;
+    animation: tabReveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  @keyframes tabReveal {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Mobile Index Scroll */
+  @media (max-width: 1024px) {
+    .mobile-tab-scroll {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(197, 198, 205, 0.2);
+    }
+    .mobile-tab-scroll::-webkit-scrollbar { display: none; }
+    .mobile-tab-scroll .sidebar-link {
+      white-space: nowrap;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.5rem 1rem;
+    }
+    }
+    .mobile-tab-scroll .sidebar-link.active {
+      border-bottom-color: #854300;
+      background: transparent;
+      padding-left: 1rem;
+    }
+  }
+
+  /* Floating Contact Button */
+  .floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #333e50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px -5px rgba(0,0,0,0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .floating-cta:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: #000;
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
+  }
+  .floating-cta .pulse {
+    width: 6px;
+    height: 6px;
+    background: #854300;
+    border-radius: 50%;
+    position: relative;
+  }
+  .floating-cta .pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    border-radius: inherit;
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3.5); opacity: 0; }
+  }
+</style>
+</head>
+
+<body class="bg-background text-primary blueprint-grid">
+
+<!-- Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/95 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-4 md:px-8 py-3 md:py-4 max-w-full mx-auto gap-2 md:gap-0">
+    <a href="index.html" class="text-lg md:text-xl font-bold tracking-tighter text-slate-900 font-headline">ING. ENE GORGA</a>
+    <div class="flex items-center gap-4 md:gap-8 font-headline tracking-tight">
+      <a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="index.html">Inicio</a>
+      <a class="text-slate-900 border-b-2 border-tertiary-container pb-0.5 text-[10px] md:text-sm font-bold" href="servicios.html">Servicios</a>
+      <a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="proyectos.html">Proyectos</a>
+      <a class="text-slate-500 hover:text-slate-900 transition-colors text-[10px] md:text-sm" href="contacto.html">Contacto</a>
+    </div>
+    <a href="contacto.html" class="hidden md:inline-block bg-tertiary-container text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:brightness-110 transition-all">
+      COTIZAR PROYECTO
+    </a>
+  </div>
+</nav>
+
+<main class="pt-32 pb-32">
+  <div class="max-w-[1600px] mx-auto px-8 md:px-16">
+    
+    <!-- Hero Interno -->
+    <header class="mb-24 reveal">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-[2px] bg-tertiary-container"></span>
+        <p class="text-tertiary-container font-black tracking-[0.4em] uppercase text-xs">Excelencia Técnica</p>
+      </div>
+      <h1 class="text-6xl md:text-8xl font-bold tracking-tighter text-primary font-headline mb-8 leading-[0.9]">
+        Soluciones de <br> <span class="text-tertiary-container">Alta Especialidad.</span>
+      </h1>
+      <p class="text-on-surface-variant text-xl md:text-2xl max-w-4xl leading-relaxed font-body">
+        Ofrecemos un respaldo técnico integral para proyectos industriales, comerciales y residenciales en Panamá. Cada solución está fundamentada en el cumplimiento estricto de las normas internacionales y la optimización de recursos.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      
+      <!-- Navigation Index (Tabs) -->
+      <aside class="lg:col-span-3">
+        <div class="sticky top-40 h-fit">
+          <p class="hidden lg:block text-[10px] font-black tracking-widest text-primary/40 uppercase mb-6 px-4">Índice Especializado</p>
+          <div class="mobile-tab-scroll flex lg:flex-col space-y-0 lg:space-y-2">
+            <button onclick="switchTab('diseno', this)" class="sidebar-link active block py-3 px-4 text-sm text-on-surface-variant hover:text-primary text-left transition-all">Diseño y Planos</button>
+            <button onclick="switchTab('supervision', this)" class="sidebar-link block py-3 px-4 text-sm text-on-surface-variant hover:text-primary text-left transition-all">Supervisión en Campo</button>
+            <button onclick="switchTab('inspeccion', this)" class="sidebar-link block py-3 px-4 text-sm text-on-surface-variant hover:text-primary text-left transition-all">Inspecciones Técnicas</button>
+            <button onclick="switchTab('tramites', this)" class="sidebar-link block py-3 px-4 text-sm text-on-surface-variant hover:text-primary text-left transition-all">Gestión de Trámites</button>
+            <button onclick="switchTab('solar', this)" class="sidebar-link block py-3 px-4 text-sm text-on-surface-variant hover:text-primary text-left transition-all">Energía Fotovoltaica</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Content Area (Tabs Container) -->
+      <div class="lg:col-span-9">
+        
+        <!-- SECCIÓN 01: DISEÑO -->
+        <div id="diseno" class="tab-content active">
+          <div class="detail-card">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div class="p-12 space-y-8">
+                <div class="w-16 h-16 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-2xl">
+                  <span class="material-symbols-outlined" style="font-size:36px;">architecture</span>
+                </div>
+                <div>
+                  <h2 class="text-3xl font-bold font-headline mb-4">Diseño y <br>Especificaciones</h2>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">Desarrollo de planimetría avanzada bajo estándares NFPA e IPC. No solo dibujamos planos, diseñamos infraestructura eficiente.</p>
+                </div>
+                <div class="space-y-6">
+                  <button onclick="toggleDetails('diseno-details', this)" class="expand-btn flex items-center gap-3 text-xs font-black tracking-widest uppercase text-tertiary-container hover:text-tertiary transition-colors group">
+                    <span>Leer más sobre este servicio</span>
+                    <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+                  </button>
+                  
+                  <div id="diseno-details" class="service-details space-y-6">
+                    <div class="pt-6 border-t border-outline-variant/20">
+                      <h4 class="text-xs font-black tracking-widest uppercase text-primary mb-4">Alcance Detallado</h4>
+                      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <li class="flex items-center gap-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest"><span class="w-2 h-2 bg-tertiary-container rounded-full"></span>Sistemas de HVAC</li>
+                        <li class="flex items-center gap-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest"><span class="w-2 h-2 bg-tertiary-container rounded-full"></span>Redes Contra Incendio</li>
+                        <li class="flex items-center gap-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest"><span class="w-2 h-2 bg-tertiary-container rounded-full"></span>Sistemas Pluviales</li>
+                        <li class="flex items-center gap-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest"><span class="w-2 h-2 bg-tertiary-container rounded-full"></span>Diseño Eléctrico</li>
+                      </ul>
+                      <p class="text-[11px] text-on-surface-variant mt-6 leading-relaxed">
+                        Nuestros diseños integran cálculos de carga térmica, dimensionamiento de tuberías bajo IPC y coordinación BIM para evitar interferencias en obra.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="relative overflow-hidden group">
+                <img src="assets/img/service1.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Diseño de Planos">
+                <div class="absolute inset-0 bg-slate-900/10"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 02: SUPERVISIÓN -->
+        <div id="supervision" class="tab-content">
+          <div class="detail-card">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div class="order-2 md:order-1 relative overflow-hidden group">
+                <img src="assets/img/service2.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Supervisión en Campo">
+                <div class="absolute inset-0 bg-slate-900/10"></div>
+              </div>
+              <div class="order-1 md:order-2 p-12 space-y-8">
+                <div class="w-16 h-16 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-2xl">
+                  <span class="material-symbols-outlined" style="font-size:36px;">engineering</span>
+                </div>
+                <div>
+                  <h2 class="text-3xl font-bold font-headline mb-4">Construcción y <br>Supervisión</h2>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">Dirección técnica responsable para garantizar que lo diseñado se ejecute con exactitud, dentro de los plazos y presupuestos establecidos.</p>
+                </div>
+                <div class="space-y-6">
+                  <button onclick="toggleDetails('supervision-details', this)" class="expand-btn flex items-center gap-3 text-xs font-black tracking-widest uppercase text-tertiary-container hover:text-tertiary transition-colors group">
+                    <span>Ver metodología en campo</span>
+                    <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+                  </button>
+
+                  <div id="supervision-details" class="service-details space-y-6">
+                    <div class="pt-6 border-t border-outline-variant/20">
+                      <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                          <span class="text-tertiary-container font-black text-xl font-headline">01</span>
+                          <div>
+                            <p class="text-xs font-black uppercase tracking-widest text-primary">Control de Calidad</p>
+                            <p class="text-xs text-on-surface-variant">Auditamos la entrada de materiales y procesos de instalación diariamente.</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                          <span class="text-tertiary-container font-black text-xl font-headline">02</span>
+                          <div>
+                            <p class="text-xs font-black uppercase tracking-widest text-primary">Certificación de Avance</p>
+                            <p class="text-xs text-on-surface-variant">Documentamos con reportes técnicos cada fase del cronograma de obra.</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 03: INSPECCIÓN -->
+        <div id="inspeccion" class="tab-content">
+          <div class="detail-card">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div class="p-12 space-y-8">
+                <div class="w-16 h-16 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-2xl">
+                  <span class="material-symbols-outlined" style="font-size:36px;">fact_check</span>
+                </div>
+                <div>
+                  <h2 class="text-3xl font-bold font-headline mb-4">Inspección <br>Técnica</h2>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">Auditoría detallada de instalaciones existentes para cumplir normativas de bomberos, junta técnica y municipios.</p>
+                </div>
+                <div class="space-y-4">
+                  <div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/20">
+                    <p class="text-xs font-bold text-primary italic">"Aseguramos la certificación final de sistemas contra incendio y eléctricos para la recepción segura de inmuebles."</p>
+                  </div>
+                </div>
+              </div>
+              <div class="relative overflow-hidden group">
+                <img src="assets/img/service3.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Inspeccion">
+                <div class="absolute inset-0 bg-slate-900/10"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 04: TRÁMITES -->
+        <div id="tramites" class="tab-content">
+          <div class="detail-card py-20 px-8 md:px-16 border-t-8 border-t-tertiary-container">
+            <div class="text-center mb-16 space-y-4">
+              <span class="text-[10px] font-black tracking-widest text-tertiary-container uppercase">Gestión de Proyectos</span>
+              <h2 class="text-4xl md:text-5xl font-bold font-headline text-primary tracking-tighter">Trámites y Aprobaciones</h2>
+              <p class="text-on-surface-variant max-w-xl mx-auto text-sm leading-relaxed">Gestionamos todo el proceso burocrático ante entidades reguladoras para evitar retrasos en el inicio de obra.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <!-- Item 1 -->
+              <div class="flex flex-col items-center text-center space-y-6">
+                <div class="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center text-primary border border-outline-variant/30">
+                   <span class="material-symbols-outlined" style="font-size:32px;">description</span>
+                </div>
+                <div>
+                  <h4 class="font-black text-sm uppercase tracking-widest text-primary mb-2">Permisos de Construcción</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-relaxed">Obtención de sellos y permisos ante el Municipio de Panamá y Ministerio de Salud (MINSA).</p>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="flex flex-col items-center text-center space-y-6">
+                <div class="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center text-primary border border-outline-variant/30">
+                   <span class="material-symbols-outlined" style="font-size:32px;">devices</span>
+                </div>
+                <div>
+                  <h4 class="font-black text-sm uppercase tracking-widest text-primary mb-2">Aprobación Digital</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-relaxed">Carga y seguimiento de planos en plataformas digitales oficiales exigidas por ley.</p>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="flex flex-col items-center text-center space-y-6">
+                <div class="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center text-primary border border-outline-variant/30">
+                   <span class="material-symbols-outlined" style="font-size:32px;">straighten</span>
+                </div>
+                <div>
+                  <h4 class="font-black text-sm uppercase tracking-widest text-primary mb-2">Entrega de Planos</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-relaxed">Diseño y sellado oficial de planos electromecánicos bajo la idoneidad técnica de la JTIA.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 05: SOLAR -->
+        <div id="solar" class="tab-content">
+          <div class="relative detail-card overflow-hidden">
+            <div class="absolute top-6 right-6 z-20 px-4 py-1.5 bg-tertiary-container text-white text-[10px] font-black tracking-[0.2em] uppercase rounded-full">Sostenibilidad</div>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+               <div class="relative overflow-hidden group">
+                <img src="assets/img/service5.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Energía Solar">
+                <div class="absolute inset-0 bg-slate-900/20"></div>
+              </div>
+              <div class="p-12 space-y-8 bg-slate-50">
+                <div class="w-16 h-16 bg-amber-100 flex items-center justify-center text-amber-700 rounded-2xl">
+                  <span class="material-symbols-outlined" style="font-size:36px;">solar_power</span>
+                </div>
+                <div>
+                  <h2 class="text-3xl font-bold font-headline mb-4">Sistemas de <br>Energía Solar</h2>
+                  <p class="text-on-surface-variant text-sm leading-relaxed font-body">Diseño e integración de sistemas fotovoltaicos para reducir costos operativos y huella de carbono.</p>
+                </div>
+                <ul class="space-y-4">
+                  <li class="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-primary">
+                    <span class="material-symbols-outlined text-sm text-tertiary-container">done_all</span> Estudios de Factibilidad
+                  </li>
+                  <li class="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-primary">
+                    <span class="material-symbols-outlined text-sm text-tertiary-container">done_all</span> Diseño Eléctrico del Sistema
+                  </li>
+                  <li class="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-primary">
+                    <span class="material-symbols-outlined text-sm text-tertiary-container">done_all</span> Trámites con Empresa Distribuidora
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="blueprint-grid flex flex-col md:flex-row justify-between items-center w-full px-12 py-12 gap-8 border-t border-outline-variant/15">
+  <div class="space-y-4 text-center md:text-left">
+    <div class="text-lg font-black text-slate-900 font-headline">ING. ENE GORGA</div>
+    <p class="uppercase tracking-widest text-[10px] text-slate-500">© 2026 ING. ENE GORGA · INGENIERÍA ELECTROMECÁNICA · PANAMÁ</p>
+  </div>
+  <div class="flex gap-6 text-[10px] font-black tracking-widest uppercase text-slate-500">
+    <a href="index.html" class="hover:text-primary transition-colors">Inicio</a>
+    <a href="servicios.html" class="hover:text-primary transition-colors">Servicios</a>
+    <a href="proyectos.html" class="hover:text-primary transition-colors">Proyectos</a>
+    <a href="contacto.html" class="hover:text-primary transition-colors">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer para reveal
+  const observerOptions = { threshold: 0.1 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal:not(.tab-content)').forEach(el => observer.observe(el));
+
+  // Toggle Service Details
+  function toggleDetails(id, btn) {
+    const details = document.getElementById(id);
+    details.classList.toggle('expanded');
+    btn.classList.toggle('active');
+    
+    if (details.classList.contains('expanded')) {
+      btn.querySelector('span').innerText = "Ocultar especificaciones";
+    } else {
+      btn.querySelector('span').innerText = btn.getAttribute('data-original-text') || "Leer más sobre este servicio";
+    }
+  }
+
+  // Guardar texto original de botones
+  document.querySelectorAll('.expand-btn').forEach(btn => {
+    btn.setAttribute('data-original-text', btn.querySelector('span').innerText);
+  });
+
+  // Tab Switching Logic
+  function switchTab(tabId, targetBtn) {
+    // Hide all contents
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    
+    // Remove active from all buttons
+    document.querySelectorAll('.sidebar-link').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // Show selected tab content
+    const activeTab = document.getElementById(tabId);
+    activeTab.classList.add('active');
+    
+    // Add active to clicked button
+    targetBtn.classList.add('active');
+
+    // Trigger reveal once
+    activeTab.classList.add('revealed');
+
+    // Scroll to top of container on mobile removed for better UX
+  }
+
+  // Handle direct links to tabs
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const btn = Array.from(document.querySelectorAll('.sidebar-link')).find(b => b.innerText.toLowerCase().includes(hash.toLowerCase().split('-')[0]));
+      if (btn) btn.click();
+    }
+  });
+</script>
+
+  <!-- Floating CTA -->
+  <a href="contacto.html" class="floating-cta font-headline">
+    <span class="pulse"></span>
+    Cotizar Proyecto
+  </a>
+
+</body>
+</html>
