@@ -185,7 +185,7 @@
       <span>Cotizar</span>
     </a>
   </div>
-  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
+  <button class="fab-trigger" id="fabTrigger" onclick="toggleFab(event)" aria-label="Abrir Menú" style="background: #333e50;">
     <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
   </button>
 </div>
@@ -327,19 +327,44 @@
 </footer>
 
 <script>
-    // FAB Menu Logic
+    // ── Global Logic ──────────────────────────────────────────────────
+    function toggleFab(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        const trigger = document.getElementById('fabTrigger');
+        const options = document.getElementById('fabOptions');
+        if (trigger && options) {
+            trigger.classList.toggle('active');
+            options.classList.toggle('active');
+        }
+    }
+
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        const f = {
+            n: document.getElementById('name').value, e: document.getElementById('email').value,
+            s: document.getElementById('service').value, p: document.getElementById('phone').value,
+            m: document.getElementById('message').value
+        };
+        const subj = encodeURIComponent(`Nuevo Proyecto: ${f.s} - ${f.n}`);
+        const body = encodeURIComponent(`Hola Ing. Gorga,\n\nMi nombre es ${f.n}.\nServicio: ${f.s}\n\nDetalles:\n${f.m}\n\nContacto:\nEmail: ${f.e}\nTel: ${f.p}`);
+        window.location.href = `mailto:enely.fong@gmail.com?subject=${subj}&body=${body}`;
+        alert('Se abrirá tu gestor de correo para completar el envío. ¡Muchas gracias!');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+        // FAB Menu Logic
         const fabTrigger = document.getElementById('fabTrigger');
         const fabOptions = document.getElementById('fabOptions');
+        const contactForm = document.getElementById('contactPageForm');
         
-        if (fabTrigger && fabOptions) {
-            fabTrigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                fabTrigger.classList.toggle('active');
-                fabOptions.classList.toggle('active');
-            });
+        if (contactForm) {
+            contactForm.onsubmit = handleFormSubmit;
+        }
 
+        if (fabTrigger && fabOptions) {
             document.addEventListener('click', (e) => {
                 const isTrigger = fabTrigger.contains(e.target);
                 const isOptions = fabOptions.contains(e.target);
@@ -356,33 +381,19 @@
                 });
             });
         }
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('revealed'), i * 150);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
-
-    // Reveal on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add('revealed'), i * 150);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Form Handle
-    document.getElementById('contactPageForm').onsubmit = function(e) {
-        e.preventDefault();
-        const f = {
-            n: document.getElementById('name').value, e: document.getElementById('email').value,
-            s: document.getElementById('service').value, p: document.getElementById('phone').value,
-            m: document.getElementById('message').value
-        };
-        const subj = encodeURIComponent(`Nuevo Proyecto: ${f.s} - ${f.n}`);
-        const body = encodeURIComponent(`Hola Ing. Gorga,\n\nMi nombre es ${f.n}.\nServicio: ${f.s}\n\nDetalles:\n${f.m}\n\nContacto:\nEmail: ${f.e}\nTel: ${f.p}`);
-        window.location.href = `mailto:enely.fong@gmail.com?subject=${subj}&body=${body}`;
-        alert('Abriendo gestor de correo...');
-    }
 </script>
 </body>
 </html>

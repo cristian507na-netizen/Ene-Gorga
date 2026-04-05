@@ -343,7 +343,7 @@
       <span>Cotizar</span>
     </a>
   </div>
-  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
+  <button class="fab-trigger" id="fabTrigger" onclick="toggleFab(event)" aria-label="Abrir Menú" style="background: #333e50;">
     <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
   </button>
 </div>
@@ -878,19 +878,38 @@ document.getElementById('filters').addEventListener('click', function(e) {
   });
 });
 
-// ── FAB Menu Logic ────────────────────────────────────────────────
+
+// ── Global FAB Toggle ──────────────────────────────────────────────
+function toggleFab(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const trigger = document.getElementById('fabTrigger');
+  const options = document.getElementById('fabOptions');
+  if (trigger && options) {
+    trigger.classList.toggle('active');
+    options.classList.toggle('active');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // ── Reveal on scroll ──────────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('revealed'), i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── FAB Menu Logic ────────────────────────────────────────────────
     const fabTrigger = document.getElementById('fabTrigger');
     const fabOptions = document.getElementById('fabOptions');
     
     if (fabTrigger && fabOptions) {
-        fabTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            fabTrigger.classList.toggle('active');
-            fabOptions.classList.toggle('active');
-        });
-
         document.addEventListener('click', (e) => {
             const isTrigger = fabTrigger.contains(e.target);
             const isOptions = fabOptions.contains(e.target);
@@ -907,19 +926,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-});
-
-// ── Reveal on scroll ──────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('revealed'), i * 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
 
 </script>

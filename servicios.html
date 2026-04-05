@@ -355,35 +355,6 @@
   </div>
 </nav>
 
-<!-- Floating Action Menu (FAB) Mobile Navigation -->
-<div class="fab-container md:hidden">
-  <div class="fab-options" id="fabOptions">
-    <a href="index.html" class="fab-option">
-      <span class="material-symbols-outlined">home</span>
-      <span>Inicio</span>
-    </a>
-    <a href="servicios.html" class="fab-option">
-      <span class="material-symbols-outlined">engineering</span>
-      <span>Servicios</span>
-    </a>
-    <a href="proyectos.html" class="fab-option">
-      <span class="material-symbols-outlined">dataset</span>
-      <span>Proyectos</span>
-    </a>
-    <a href="contacto.html" class="fab-option">
-      <span class="material-symbols-outlined">alternate_email</span>
-      <span>Contacto</span>
-    </a>
-    <a href="contacto.html" class="fab-option" style="background:#854300;">
-      <span class="material-symbols-outlined" style="color:white;">payments</span>
-      <span>Cotizar</span>
-    </a>
-  </div>
-  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
-    <span class="material-symbols-outlined" style="font-size:32px;">add</span>
-  </button>
-</div>
-
 <main class="pt-32 pb-32">
   <div class="max-w-[1600px] mx-auto px-8 md:px-16">
     
@@ -666,12 +637,25 @@
       <span>Cotizar</span>
     </a>
   </div>
-  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
+  <button class="fab-trigger" id="fabTrigger" onclick="toggleFab(event)" aria-label="Abrir Menú" style="background: #333e50;">
     <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
   </button>
 </div>
 
 <script>
+  // Global FAB Toggle (Guaranteed Mobile Execution)
+  function toggleFab(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const trigger = document.getElementById('fabTrigger');
+    const options = document.getElementById('fabOptions');
+    if (trigger && options) {
+      trigger.classList.toggle('active');
+      options.classList.toggle('active');
+    }
+  }
 
   // Toggle Service Details (Expanded Scope)
   function toggleDetails(id, btn) {
@@ -727,18 +711,11 @@
       if (btn) btn.click();
     }
 
-    // Innovative Floating Action Menu (FAB) Logic
+    // Innovative Floating Action Menu (FAB) Close Logic
     const fabTrigger = document.getElementById('fabTrigger');
     const fabOptions = document.getElementById('fabOptions');
     
     if (fabTrigger && fabOptions) {
-        fabTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            fabTrigger.classList.toggle('active');
-            fabOptions.classList.toggle('active');
-        });
-
         document.addEventListener('click', (e) => {
             if (!fabTrigger.contains(e.target) && !fabOptions.contains(e.target)) {
                 fabTrigger.classList.remove('active');
@@ -754,7 +731,6 @@
         });
     }
   });
-
 </script>
 </body>
 </html>

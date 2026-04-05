@@ -454,35 +454,6 @@
   </div>
 </nav>
 
-<!-- Floating Action Menu (FAB) Mobile Navigation -->
-<div class="fab-container md:hidden">
-  <div class="fab-options" id="fabOptions">
-    <a href="index.html" class="fab-option">
-      <span class="material-symbols-outlined">home</span>
-      <span>Inicio</span>
-    </a>
-    <a href="servicios.html" class="fab-option">
-      <span class="material-symbols-outlined">engineering</span>
-      <span>Servicios</span>
-    </a>
-    <a href="proyectos.html" class="fab-option">
-      <span class="material-symbols-outlined">dataset</span>
-      <span>Proyectos</span>
-    </a>
-    <a href="contacto.html" class="fab-option">
-      <span class="material-symbols-outlined">alternate_email</span>
-      <span>Contacto</span>
-    </a>
-    <a href="contacto.html" class="fab-option" style="background:#854300;">
-      <span class="material-symbols-outlined" style="color:white;">payments</span>
-      <span>Cotizar</span>
-    </a>
-  </div>
-  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
-    <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
-  </button>
-</div>
-
 <main class="pt-28 blueprint-grid" id="home">
 <!-- Hero Section — fondo: blueprint-grid SIEMPRE, nunca oscurecer ni reemplazar -->
 <section class="flex flex-col px-8 md:px-20 pb-20 reveal">
@@ -943,6 +914,34 @@
 </div>
 </footer>
 
+<!-- Floating Action Menu (FAB) Mobile Navigation -->
+<div class="fab-container md:hidden">
+  <div class="fab-options" id="fabOptions">
+    <a href="index.html" class="fab-option">
+      <span class="material-symbols-outlined">home</span>
+      <span>Inicio</span>
+    </a>
+    <a href="servicios.html" class="fab-option">
+      <span class="material-symbols-outlined">engineering</span>
+      <span>Servicios</span>
+    </a>
+    <a href="proyectos.html" class="fab-option">
+      <span class="material-symbols-outlined">work</span>
+      <span>Proyectos</span>
+    </a>
+    <a href="contacto.html" class="fab-option">
+      <span class="material-symbols-outlined">mail</span>
+      <span>Contacto</span>
+    </a>
+    <a href="contacto.html" class="fab-option" style="background:#854300;">
+      <span class="material-symbols-outlined">send</span>
+      <span>Cotizar</span>
+    </a>
+  </div>
+  <button class="fab-trigger" id="fabTrigger" onclick="toggleFab(event)" aria-label="Abrir Menú" style="background: #333e50;">
+    <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
+  </button>
+</div>
 
 <!-- Animation Script -->
 <script>
@@ -1306,52 +1305,50 @@
             blurTextObserver.observe(el);
         });
 
+
+        }); // End of main DOMContentLoaded
+
         // Innovative Floating Action Menu (FAB) Menu Logic
-        const fabTrigger = document.getElementById('fabTrigger');
-        const fabOptions = document.getElementById('fabOptions');
-        
-        if (fabTrigger && fabOptions) {
-            fabTrigger.addEventListener('click', (e) => {
+        function toggleFab(e) {
+            if (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                fabTrigger.classList.toggle('active');
-                fabOptions.classList.toggle('active');
-            });
+            }
+            const trigger = document.getElementById('fabTrigger');
+            const options = document.getElementById('fabOptions');
+            if (trigger && options) {
+                trigger.classList.toggle('active');
+                options.classList.toggle('active');
+            }
+        }
 
-            // Close FAB when clicking outside or on an option
-            document.addEventListener('click', (e) => {
-                const isTrigger = fabTrigger.contains(e.target);
-                const isOptions = fabOptions.contains(e.target);
-                if (!isTrigger && !isOptions) {
+        // Global Close Logic
+        document.addEventListener('click', (e) => {
+            const fabTrigger = document.getElementById('fabTrigger');
+            const fabOptions = document.getElementById('fabOptions');
+            if (fabTrigger && fabOptions) {
+                if (!fabTrigger.contains(e.target) && !fabOptions.contains(e.target)) {
                     fabTrigger.classList.remove('active');
                     fabOptions.classList.remove('active');
                 }
-            });
+            }
+        });
 
-            fabOptions.querySelectorAll('.fab-option').forEach(opt => {
-                opt.addEventListener('click', () => {
-                    fabTrigger.classList.remove('active');
-                    fabOptions.classList.remove('active');
-                });
-            });
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const service = document.getElementById('form-service').value;
+            const email = document.getElementById('form-email').value;
+            const phone = document.getElementById('form-phone').value;
+            const message = document.getElementById('form-message').value;
+
+            const subject = encodeURIComponent(`Nuevo Proyecto: ${service} - ${name}`);
+            const body = encodeURIComponent(`Hola Ing. Gorga,\n\nMi nombre es ${name}.\nSolicito el servicio de: ${service}\n\nDetalles del proyecto:\n${message}\n\nContacto:\nEmail: ${email}\nTel: ${phone}`);
+
+            window.location.href = `mailto:enely.fong@gmail.com?subject=${subject}&body=${body}`;
+            
+            alert('Se abrirá tu gestor de correo para completar el envío. ¡Muchas gracias!');
         }
-    });
-
-    function handleFormSubmit(e) {
-        e.preventDefault();
-        const name = document.getElementById('form-name').value;
-        const service = document.getElementById('form-service').value;
-        const email = document.getElementById('form-email').value;
-        const phone = document.getElementById('form-phone').value;
-        const message = document.getElementById('form-message').value;
-
-        const subject = encodeURIComponent(`Nuevo Proyecto: ${service} - ${name}`);
-        const body = encodeURIComponent(`Hola Ing. Gorga,\n\nMi nombre es ${name}.\nSolicito el servicio de: ${service}\n\nDetalles del proyecto:\n${message}\n\nContacto:\nEmail: ${email}\nTel: ${phone}`);
-
-        window.location.href = `mailto:enely.fong@gmail.com?subject=${subject}&body=${body}`;
-        
-        alert('Se abrirá tu gestor de correo para completar el envío. ¡Muchas gracias!');
-    }
 </script>
  </body>
 </html>
