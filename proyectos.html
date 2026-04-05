@@ -208,18 +208,16 @@
   .fab-trigger {
       width: 52px;
       height: 52px;
-      border-radius: 50%;
-      background: rgba(17, 17, 17, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: #333e50;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.1);
   }
   .fab-trigger.active {
       transform: rotate(45deg);
@@ -346,7 +344,7 @@
     </a>
   </div>
   <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
-    <span class="material-symbols-outlined" style="font-size:32px;">add</span>
+    <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
   </button>
 </div>
 

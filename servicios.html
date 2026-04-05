@@ -251,18 +251,16 @@
   .fab-trigger {
       width: 52px;
       height: 52px;
-      border-radius: 50%;
-      background: rgba(17, 17, 17, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: #333e50;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.1);
   }
   .fab-trigger.active {
       transform: rotate(45deg);
@@ -630,22 +628,95 @@
 </main>
 
 <!-- Footer -->
-<footer class="blueprint-grid flex flex-col md:flex-row justify-between items-center w-full px-12 py-12 gap-8 border-t border-outline-variant/15">
-  <div class="space-y-4 text-center md:text-left">
-    <div class="text-lg font-black text-slate-900 font-headline">ING. ENE GORGA</div>
-    <p class="uppercase tracking-widest text-[10px] text-slate-500">© 2026 ING. ENE GORGA · INGENIERÍA ELECTROMECÁNICA · PANAMÁ</p>
+
+<!-- Floating Action Menu (FAB) Mobile Navigation -->
+<div class="fab-container md:hidden">
+  <div class="fab-options" id="fabOptions">
+    <a href="index.html" class="fab-option">
+      <span class="material-symbols-outlined">home</span>
+      <span>Inicio</span>
+    </a>
+    <a href="servicios.html" class="fab-option">
+      <span class="material-symbols-outlined">engineering</span>
+      <span>Servicios</span>
+    </a>
+    <a href="proyectos.html" class="fab-option">
+      <span class="material-symbols-outlined">work</span>
+      <span>Proyectos</span>
+    </a>
+    <a href="contacto.html" class="fab-option">
+      <span class="material-symbols-outlined">mail</span>
+      <span>Contacto</span>
+    </a>
+    <a href="contacto.html" class="fab-option" style="background:#854300;">
+      <span class="material-symbols-outlined">send</span>
+      <span>Cotizar</span>
+    </a>
   </div>
-  <div class="flex gap-6 text-[10px] font-black tracking-widest uppercase text-slate-500">
-    <a href="index.html" class="hover:text-primary transition-colors">Inicio</a>
-    <a href="servicios.html" class="hover:text-primary transition-colors">Servicios</a>
-    <a href="proyectos.html" class="hover:text-primary transition-colors">Proyectos</a>
-    <a href="contacto.html" class="hover:text-primary transition-colors">Contacto</a>
-  </div>
+  <button class="fab-trigger" id="fabTrigger" aria-label="Abrir Menú">
+    <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
+  </button>
+</div>
+
 </footer>
 
 <script>
-  // FAB Menu Logic
+
+  // Toggle Service Details (Expanded Scope)
+  function toggleDetails(id, btn) {
+    const details = document.getElementById(id);
+    if (!details) return;
+    details.classList.toggle('expanded');
+    btn.classList.toggle('active');
+    
+    if (details.classList.contains('expanded')) {
+      btn.querySelector('span').innerText = "Ocultar especificaciones";
+    } else {
+      btn.querySelector('span').innerText = btn.getAttribute('data-original-text') || "Ver alcance";
+    }
+  }
+
+  // Tab Switching Logic (Expanded Scope)
+  function switchTab(tabId, targetBtn) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.sidebar-link').forEach(btn => btn.classList.remove('active'));
+
+    const activeTab = document.getElementById(tabId);
+    if (activeTab) {
+      activeTab.classList.add('active');
+      activeTab.classList.add('revealed');
+    }
+    if (targetBtn) targetBtn.classList.add('active');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    // Intersection Observer for Reveal Effects
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal:not(.tab-content)').forEach(el => observer.observe(el));
+
+    // Initialize button original text for toggleDetails
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+      const span = btn.querySelector('span');
+      if (span) btn.setAttribute('data-original-text', span.innerText);
+    });
+
+    // Handle incoming hash links for tabs
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const btn = Array.from(document.querySelectorAll('.sidebar-link'))
+                       .find(b => b.innerText.toLowerCase().includes(hash.toLowerCase().split('-')[0]));
+      if (btn) btn.click();
+    }
+
+    // Innovative Floating Action Menu (FAB) Logic
     const fabTrigger = document.getElementById('fabTrigger');
     const fabOptions = document.getElementById('fabOptions');
     
@@ -658,9 +729,7 @@
         });
 
         document.addEventListener('click', (e) => {
-            const isTrigger = fabTrigger.contains(e.target);
-            const isOptions = fabOptions.contains(e.target);
-            if (!isTrigger && !isOptions) {
+            if (!fabTrigger.contains(e.target) && !fabOptions.contains(e.target)) {
                 fabTrigger.classList.remove('active');
                 fabOptions.classList.remove('active');
             }
@@ -671,101 +740,6 @@
                 fabTrigger.classList.remove('active');
                 fabOptions.classList.remove('active');
             });
-        });
-    }
-  });
-
-  // Floating CTA removal confirmed
-
-  // Intersection Observer para reveal
-  const observerOptions = { threshold: 0.1 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.reveal:not(.tab-content)').forEach(el => observer.observe(el));
-
-  // Toggle Service Details
-  function toggleDetails(id, btn) {
-    const details = document.getElementById(id);
-    details.classList.toggle('expanded');
-    btn.classList.toggle('active');
-    
-    if (details.classList.contains('expanded')) {
-      btn.querySelector('span').innerText = "Ocultar especificaciones";
-    } else {
-      btn.querySelector('span').innerText = btn.getAttribute('data-original-text') || "Leer más sobre este servicio";
-    }
-  }
-
-  // Guardar texto original de botones
-  document.querySelectorAll('.expand-btn').forEach(btn => {
-    btn.setAttribute('data-original-text', btn.querySelector('span').innerText);
-  });
-
-  // Tab Switching Logic
-  function switchTab(tabId, targetBtn) {
-    // Hide all contents
-    document.querySelectorAll('.tab-content').forEach(tab => {
-      tab.classList.remove('active');
-    });
-    
-    // Remove active from all buttons
-    document.querySelectorAll('.sidebar-link').forEach(btn => {
-      btn.classList.remove('active');
-    });
-
-    // Show selected tab content
-    const activeTab = document.getElementById(tabId);
-    activeTab.classList.add('active');
-    
-    // Add active to clicked button
-    targetBtn.classList.add('active');
-
-    // Trigger reveal once
-    activeTab.classList.add('revealed');
-
-    // Scroll to top of container on mobile removed for better UX
-  }
-
-  // Handle direct links to tabs
-  window.addEventListener('load', () => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-      const btn = Array.from(document.querySelectorAll('.sidebar-link')).find(b => b.innerText.toLowerCase().includes(hash.toLowerCase().split('-')[0]));
-      if (btn) btn.click();
-    }
-  });
-
-  // FAB Menu Logic
-  document.addEventListener('DOMContentLoaded', () => {
-    const fabTrigger = document.getElementById('fabTrigger');
-    const fabOptions = document.getElementById('fabOptions');
-    
-    if (fabTrigger && fabOptions) {
-        fabTrigger.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            fabTrigger.classList.toggle('active');
-            fabOptions.classList.toggle('active');
-        };
-
-        document.addEventListener('click', (e) => {
-            if (!fabTrigger.contains(e.target) && !fabOptions.contains(e.target)) {
-                fabTrigger.classList.remove('active');
-                fabOptions.classList.remove('active');
-            }
-        });
-
-        fabOptions.querySelectorAll('.fab-option').forEach(opt => {
-            opt.onclick = () => {
-                fabTrigger.classList.remove('active');
-                fabOptions.classList.remove('active');
-            };
         });
     }
   });
