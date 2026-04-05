@@ -183,7 +183,7 @@
         from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
         transparent,
         var(--shiny-cta-highlight) var(--gradient-percent),
-        var(--shiny-cta-shine) calc(var(--gradient-percent) * 2),
+        var(--gradient-shine) calc(var(--gradient-percent) * 2),
         var(--shiny-cta-highlight) calc(var(--gradient-percent) * 3),
         transparent calc(var(--gradient-percent) * 4)
       ) border-box;
@@ -307,7 +307,7 @@
 <nav class="fixed top-0 w-full z-50 bg-slate-50/95 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
   <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1600px] mx-auto">
     <div class="text-xl font-bold tracking-tighter text-slate-900 font-headline flex-shrink-0">
-      <a href="index.html">ING. ENE GORGA</a>
+      <a href="index.html" class="hover:opacity-80 transition-opacity">ING. ENE GORGA</a>
     </div>
     
     <!-- Navigation Links -->
@@ -435,11 +435,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Construcción)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Centro de distribución logístico con inversión superior a $80 millones.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Pacora, PA</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -456,11 +460,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Diseño y Construcción)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Diseño y construcción de múltiples locales a nivel nacional.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Panamá</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -477,11 +485,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Desarrollo)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Sede Northern Region (CAF). Desarrollo técnico de alto nivel.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Ciudad de Panamá</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -498,11 +510,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Diseño y Especificaciones)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Ingeniería electromecánica para templos en 4 países de LATAM.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">public</span>4 Países</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -519,11 +535,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Inspección Club House)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Inspección técnica del Club House en prestigioso proyecto.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Santa María, PA</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -540,11 +560,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Inspección Técnica)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Inspección técnica de viviendas para certificación y entrega.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Coclé, Panamá</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -561,11 +585,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Inspección Técnica)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Inspección técnica integral bajo estricta normativa NFPA.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">verified</span>NFPA 13, 20, 72</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -582,11 +610,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Revisión de Planos)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Revisión normativa de planos para instalaciones de producción lechera y establos.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">location_on</span>Panamá</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
@@ -603,11 +635,15 @@
           <p class="text-xs text-on-surface-variant mb-3">(Ingeniería Regional)</p>
           <p class="text-sm text-on-surface-variant leading-relaxed font-body">Más de 25 proyectos ejecutados en Centro y Sudamérica.</p>
         </div>
-        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
           <span class="flex items-center gap-1 text-[10px] font-bold text-primary"><span class="material-symbols-outlined text-tertiary-container" style="font-size:14px;">public</span>5 Países</span>
-          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none">
+          <div class="see-more-trigger text-tertiary-container font-bold text-xs pointer-events-none md:flex hidden">
             Ver más →
           </div>
+          <!-- Mobile Only Optimized Button -->
+          <button class="md:hidden bg-[#333e50] text-white text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm shadow-xl active:bg-black transition-all pointer-events-none">
+            VER DETALLES
+          </button>
         </div>
       </div>
     </div>
