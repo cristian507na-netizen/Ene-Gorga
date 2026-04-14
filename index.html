@@ -96,6 +96,10 @@
         .project-card:hover .project-overlay {
             opacity: 1;
         }
+        @keyframes shiny-text {
+          0%, 60%, 100% { background-position: calc(-100% - var(--shiny-width)) 0; }
+          30%            { background-position: calc(100% + var(--shiny-width)) 0; }
+        }
         /* Proyecto carousel word animation */
         @keyframes wordBlurIn {
             from { filter: blur(8px); opacity: 0; transform: translateY(4px); }
@@ -409,7 +413,7 @@
   <!-- Badge -->
   <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-200/50 border border-slate-300/30 text-[10px] font-bold tracking-[0.25em] uppercase mb-10 overflow-hidden" style="border-radius:999px;backdrop-filter:blur(8px);">
     <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-tertiary-container shadow-[0_0_8px_rgba(133,67,0,0.6)]"></span>
-    <span style="--shiny-width:200px;animation:shiny-text 8s infinite;" class="text-slate-600/70 bg-clip-text bg-no-repeat [background-position:0_0] [background-size:var(--shiny-width)_100%] bg-gradient-to-r from-transparent via-slate-900 via-50% to-transparent font-black tracking-widest uppercase">
+    <span style="--shiny-width:280px;animation:shiny-text 6s ease-in-out infinite;" class="text-slate-600/70 bg-clip-text bg-no-repeat [background-position:0_0] [background-size:var(--shiny-width)_100%] bg-gradient-to-r from-transparent via-slate-900 via-50% to-transparent font-black tracking-widest uppercase">
       PLANOS INGENIERÍA FONG · INGENIERÍA ELECTROMECÁNICA · PANAMÁ
     </span>
   </div>
