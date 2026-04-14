@@ -1,0 +1,28 @@
+{
+  "name": "ene-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "css": "node node_modules/tailwindcss/lib/cli.js -i assets/css/input.css -o assets/css/styles.css --minify",
+    "css:watch": "node node_modules/tailwindcss/lib/cli.js -i assets/css/input.css -o assets/css/styles.css --watch",
+    "images": "node scripts/convert-webp.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristian507na-netizen/Ene-Gorga.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cristian507na-netizen/Ene-Gorga/issues"
+  },
+  "homepage": "https://github.com/cristian507na-netizen/Ene-Gorga#readme",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.11",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.19"
+  }
+}

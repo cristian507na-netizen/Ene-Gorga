@@ -12,30 +12,13 @@
 
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#333e50",
-              "tertiary-container": "#854300",
-              "on-surface-variant": "#44474c",
-              "outline-variant": "#c5c6cd",
-              "surface-container-low": "#f1f4f6",
-              "surface-container-highest": "#e0e3e5",
-            },
-            fontFamily: {
-              "headline": ["Space Grotesk"],
-              "body": ["Manrope"]
-            }
-          }
-        }
-      }
-</script>
+<!-- Fonts async -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap"/></noscript>
+<!-- Material Symbols async (non-blocking) -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/></noscript>
+<link rel="stylesheet" href="assets/css/styles.css"/>
 
 <style>
     body { font-family: 'Manrope', sans-serif; background: #f7fafc; }

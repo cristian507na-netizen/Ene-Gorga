@@ -16,10 +16,14 @@
 
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<!-- Preload critical fonts -->
+<!-- Preload LCP image -->
+<link rel="preload" as="image" href="assets/img/ph_bomberos.webp" type="image/webp"/>
+<!-- Fonts async -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=Manrope:wght@300;400;600&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=Manrope:wght@300;400;600&amp;display=swap"></noscript>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols async (non-blocking) -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"/></noscript>
 
 <!-- Schema JSON-LD ProfessionalService -->
 <script type="application/ld+json">
@@ -57,76 +61,7 @@
 }
 </script>
 
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-bright": "#f7fafc",
-                    "on-tertiary-container": "#ffbb8b",
-                    "secondary": "#555f71",
-                    "secondary-fixed-dim": "#bdc7dc",
-                    "secondary-fixed": "#d9e3f9",
-                    "on-primary-container": "#becae0",
-                    "surface-tint": "#545f72",
-                    "on-tertiary": "#ffffff",
-                    "on-secondary": "#ffffff",
-                    "on-error": "#ffffff",
-                    "inverse-surface": "#2d3133",
-                    "surface-variant": "#e0e3e5",
-                    "primary": "#333e50",
-                    "on-primary-fixed": "#111c2c",
-                    "primary-container": "#4a5568",
-                    "error": "#ba1a1a",
-                    "inverse-on-surface": "#eef1f3",
-                    "on-secondary-fixed": "#121c2c",
-                    "on-surface": "#181c1e",
-                    "on-secondary-container": "#596376",
-                    "on-secondary-fixed-variant": "#3d4759",
-                    "surface-container-lowest": "#ffffff",
-                    "surface": "#f7fafc",
-                    "outline": "#75777d",
-                    "on-background": "#181c1e",
-                    "on-tertiary-fixed-variant": "#703700",
-                    "tertiary-fixed": "#ffdcc5",
-                    "surface-container": "#ebeef0",
-                    "on-primary": "#ffffff",
-                    "error-container": "#ffdad6",
-                    "primary-fixed": "#d8e3fa",
-                    "primary-fixed-dim": "#bcc7dd",
-                    "tertiary-container": "#854300",
-                    "surface-dim": "#d7dadc",
-                    "surface-container-low": "#f1f4f6",
-                    "background": "#f7fafc",
-                    "tertiary-fixed-dim": "#ffb783",
-                    "secondary-container": "#d6e0f6",
-                    "outline-variant": "#c5c6cd",
-                    "on-primary-fixed-variant": "#3c475a",
-                    "on-error-container": "#93000a",
-                    "surface-container-highest": "#e0e3e5",
-                    "on-surface-variant": "#44474c",
-                    "on-tertiary-fixed": "#301400",
-                    "tertiary": "#633000",
-                    "surface-container-high": "#e5e9eb",
-                    "inverse-primary": "#bcc7dd"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Manrope"],
-                    "label": ["Manrope"]
-            }
-          },
-        },
-      }
-    </script>
+<link rel="stylesheet" href="assets/css/styles.css"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -569,7 +504,10 @@
     <!-- Right: Imagen (5 cols) -->
     <div class="lg:col-span-5 relative">
         <div class="relative rounded-[2rem] overflow-hidden shadow-2xl">
-            <img alt="Ing. Enely Fong - Supervisión Técnica" class="w-full h-[600px] object-cover" loading="lazy" src="assets/img/ph_bomberos.png"/>
+            <picture>
+              <source srcset="assets/img/ph_bomberos.webp" type="image/webp"/>
+              <img alt="Ing. Enely Fong - Supervisión Técnica" class="w-full h-[600px] object-cover" loading="eager" fetchpriority="high" decoding="async" src="assets/img/ph_bomberos.png"/>
+            </picture>
             <!-- Overlay decorativo sutil -->
             <div class="absolute inset-0 bg-primary/10"></div>
         </div>
@@ -653,7 +591,7 @@
     <!-- Card 1: Diseño y Especificaciones -->
     <div class="service-card group bg-white border border-outline-variant/10 shadow-sm reveal overflow-hidden" style="border-radius:24px;">
       <div class="overflow-hidden">
-        <img src="assets/img/service1.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Diseño y Especificaciones">
+        <picture><source srcset="assets/img/service1.webp" type="image/webp"/><img src="assets/img/service1.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Diseño y Especificaciones" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-10 space-y-6">
         <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">
@@ -669,7 +607,7 @@
     <!-- Card 2: Construcción y Supervisión -->
     <div class="service-card group bg-white border border-outline-variant/10 shadow-sm reveal overflow-hidden" style="border-radius:24px; transition-delay:100ms;">
       <div class="overflow-hidden">
-        <img src="assets/img/service2.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Construcción">
+        <picture><source srcset="assets/img/service2.webp" type="image/webp"/><img src="assets/img/service2.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Construcción" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-10 space-y-6">
         <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">
@@ -684,7 +622,7 @@
     <!-- Card 3: Inspección Técnica -->
     <div class="service-card group bg-white border border-outline-variant/10 shadow-sm reveal overflow-hidden" style="border-radius:24px; transition-delay:200ms;">
       <div class="overflow-hidden">
-        <img src="assets/img/service3.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Inspeccion">
+        <picture><source srcset="assets/img/service3.webp" type="image/webp"/><img src="assets/img/service3.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Inspección" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-10 space-y-6">
         <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">
@@ -703,7 +641,7 @@
     <!-- Card 4: Revisión de Planos y Cumplimiento Normativo -->
     <div class="service-card group bg-white border border-outline-variant/10 shadow-sm reveal overflow-hidden" style="border-radius:24px; transition-delay:300ms;">
       <div class="overflow-hidden">
-        <img src="assets/img/service4.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Revisión de Planos">
+        <picture><source srcset="assets/img/service4.webp" type="image/webp"/><img src="assets/img/service4.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Revisión de Planos" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-10 space-y-6">
         <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">
@@ -719,7 +657,7 @@
     <div class="service-card group bg-white border border-outline-variant/10 shadow-sm relative reveal overflow-hidden" style="border-radius:24px; transition-delay:400ms;">
       <div class="absolute top-6 right-6 z-10 px-4 py-1.5 text-[10px] font-black tracking-widest text-white shadow-lg" style="background-color:#854300;border-radius:2px;">SERVICIO EN EXPANSIÓN</div>
       <div class="overflow-hidden">
-        <img src="assets/img/service5.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Energía Solar">
+        <picture><source srcset="assets/img/service5.webp" type="image/webp"/><img src="assets/img/service5.png" class="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Energía Solar" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-10 space-y-6">
         <div class="w-12 h-12 bg-tertiary-container/10 flex items-center justify-center text-tertiary-container rounded-xl">

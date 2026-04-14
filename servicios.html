@@ -15,32 +15,10 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap"></noscript>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          "primary": "#333e50",
-          "primary-container": "#4a5568",
-          "tertiary-container": "#854300",
-          "tertiary": "#633000",
-          "on-surface-variant": "#44474c",
-          "outline-variant": "#c5c6cd",
-          "surface-container-high": "#e5e9eb",
-          "surface-container-highest": "#e0e3e5",
-          "background": "#f7fafc",
-        },
-        fontFamily: {
-          "headline": ["Space Grotesk"],
-          "body": ["Manrope"],
-        }
-      }
-    }
-  }
-</script>
+<!-- Material Symbols async (non-blocking) -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/></noscript>
+<link rel="stylesheet" href="assets/css/styles.css"/>
 
 <style>
   body { font-family: 'Manrope', sans-serif; }
@@ -433,7 +411,7 @@
                 </div>
               </div>
               <div class="relative overflow-hidden group">
-                <img src="assets/img/service1.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Diseño de Planos">
+                <picture><source srcset="assets/img/service1.webp" type="image/webp"/><img src="assets/img/service1.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Diseño de Planos" loading="eager" fetchpriority="high" decoding="async"/></picture>
                 <div class="absolute inset-0 bg-slate-900/10"></div>
               </div>
             </div>
@@ -445,7 +423,7 @@
           <div class="detail-card">
             <div class="grid grid-cols-1 md:grid-cols-2">
               <div class="order-2 md:order-1 relative overflow-hidden group">
-                <img src="assets/img/service2.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Supervisión en Campo">
+                <picture><source srcset="assets/img/service2.webp" type="image/webp"/><img src="assets/img/service2.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Supervisión en Campo" loading="lazy" decoding="async"/></picture>
                 <div class="absolute inset-0 bg-slate-900/10"></div>
               </div>
               <div class="order-1 md:order-2 p-12 space-y-8">
@@ -507,7 +485,7 @@
                 </div>
               </div>
               <div class="relative overflow-hidden group">
-                <img src="assets/img/service3.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Inspeccion">
+                <picture><source srcset="assets/img/service3.webp" type="image/webp"/><img src="assets/img/service3.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Inspección Técnica" loading="lazy" decoding="async"/></picture>
                 <div class="absolute inset-0 bg-slate-900/10"></div>
               </div>
             </div>
@@ -519,7 +497,7 @@
           <div class="detail-card">
             <div class="grid grid-cols-1 md:grid-cols-2">
               <div class="order-2 md:order-1 relative overflow-hidden group">
-                <img src="assets/img/service4.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Revisión de Planos">
+                <picture><source srcset="assets/img/service4.webp" type="image/webp"/><img src="assets/img/service4.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Revisión de Planos" loading="lazy" decoding="async"/></picture>
                 <div class="absolute inset-0 bg-slate-900/10"></div>
               </div>
               <div class="order-1 md:order-2 p-12 space-y-8">
@@ -592,7 +570,7 @@
                 </div>
               </div>
               <div class="relative overflow-hidden group">
-                <img src="assets/img/service5.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Energía Solar">
+                <picture><source srcset="assets/img/service5.webp" type="image/webp"/><img src="assets/img/service5.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Energía Solar" loading="lazy" decoding="async"/></picture>
                 <div class="absolute inset-0 bg-slate-900/10"></div>
                 <div class="absolute top-6 right-6 z-20 px-4 py-1.5 bg-tertiary-container text-white text-[10px] font-black tracking-[0.2em] uppercase rounded-full">Sostenibilidad</div>
               </div>
@@ -605,7 +583,7 @@
           <div class="detail-card">
             <div class="grid grid-cols-1 md:grid-cols-2">
               <div class="order-2 md:order-1 relative overflow-hidden group">
-                <img src="assets/img/service4.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Consultoría y Asesoría Técnica">
+                <picture><source srcset="assets/img/service4.webp" type="image/webp"/><img src="assets/img/service4.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Consultoría y Asesoría Técnica" loading="lazy" decoding="async"/></picture>
                 <div class="absolute inset-0 bg-slate-900/10"></div>
               </div>
               <div class="order-1 md:order-2 p-12 space-y-8">

@@ -14,30 +14,10 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Manrope:wght@300;400;600&display=swap"></noscript>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          "primary": "#333e50",
-          "primary-container": "#4a5568",
-          "tertiary-container": "#854300",
-          "tertiary": "#633000",
-          "on-surface-variant": "#44474c",
-          "outline-variant": "#c5c6cd",
-          "surface-container-high": "#e5e9eb",
-          "surface-container-highest": "#e0e3e5",
-        },
-        fontFamily: {
-          "headline": ["Space Grotesk"],
-          "body": ["Manrope"],
-        }
-      }
-    }
-  }
-</script>
+<!-- Material Symbols async (non-blocking) -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/></noscript>
+<link rel="stylesheet" href="assets/css/styles.css"/>
 <style>
   body { font-family: 'Manrope', sans-serif; }
   h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; }
@@ -429,7 +409,7 @@
     <!-- CARD 1: CEDI Grupo Rey -->
     <div class="proj-card reveal" data-category="industrial" onclick="openModal(0)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/cedi.png" class="proj-img w-full object-cover" style="height:220px;" alt="CEDI Grupo Rey">
+        <picture><source srcset="assets/img/cedi.webp" type="image/webp"/><img src="assets/img/cedi.png" class="proj-img w-full object-cover" style="height:220px;" alt="CEDI Grupo Rey" loading="eager" fetchpriority="high" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -454,7 +434,7 @@
     <!-- CARD 2: Supermercados Rey -->
     <div class="proj-card reveal" data-category="comercial" onclick="openModal(1)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/supermercados.png" class="proj-img w-full object-cover" style="height:220px;" alt="Supermercados Rey">
+        <picture><source srcset="assets/img/supermercados.webp" type="image/webp"/><img src="assets/img/supermercados.png" class="proj-img w-full object-cover" style="height:220px;" alt="Supermercados Rey" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -479,7 +459,7 @@
     <!-- CARD 3: Sede Regional CAF -->
     <div class="proj-card reveal" data-category="comercial corporativo" onclick="openModal(2)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/caf.png" class="proj-img w-full object-cover" style="height:220px;" alt="Sede Regional CAF">
+        <picture><source srcset="assets/img/caf.webp" type="image/webp"/><img src="assets/img/caf.png" class="proj-img w-full object-cover" style="height:220px;" alt="Sede Regional CAF" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -504,7 +484,7 @@
     <!-- CARD 4: Templos SUD -->
     <div class="proj-card reveal" data-category="internacional" onclick="openModal(3)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/templo_sud.png" class="proj-img w-full object-cover" style="height:220px;" alt="Templos SUD Latinoamérica">
+        <picture><source srcset="assets/img/templo_sud.webp" type="image/webp"/><img src="assets/img/templo_sud.png" class="proj-img w-full object-cover" style="height:220px;" alt="Templos SUD Latinoamérica" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -529,7 +509,7 @@
     <!-- CARD 5: The Woods Santa María -->
     <div class="proj-card reveal" data-category="residencial inspeccion" onclick="openModal(4)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/thewoods.png" class="proj-img w-full object-cover" style="height:220px;" alt="The Woods Santa María">
+        <picture><source srcset="assets/img/thewoods.webp" type="image/webp"/><img src="assets/img/thewoods.png" class="proj-img w-full object-cover" style="height:220px;" alt="The Woods Santa María" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -554,7 +534,7 @@
     <!-- CARD 6: Casas Buenaventura -->
     <div class="proj-card reveal" data-category="residencial inspeccion" onclick="openModal(5)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/buenaventura.jpg" class="proj-img w-full object-cover" style="height:220px;" alt="Casas Buenaventura">
+        <picture><source srcset="assets/img/buenaventura.webp" type="image/webp"/><img src="assets/img/buenaventura.jpg" class="proj-img w-full object-cover" style="height:220px;" alt="Casas Buenaventura" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -579,7 +559,7 @@
     <!-- CARD 7: Inspección PH Bomberos -->
     <div class="proj-card reveal" data-category="residencial inspeccion" onclick="openModal(6)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/ph_bomberos.png" class="proj-img w-full object-cover" style="height:220px;" alt="Inspección PH Bomberos">
+        <picture><source srcset="assets/img/ph_bomberos.webp" type="image/webp"/><img src="assets/img/ph_bomberos.png" class="proj-img w-full object-cover" style="height:220px;" alt="Inspección PH Bomberos" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -604,7 +584,7 @@
     <!-- CARD 8: Industrias Lácteas -->
     <div class="proj-card reveal" data-category="industrial" onclick="openModal(7)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/lacteas.png" class="proj-img w-full object-cover" style="height:220px;" alt="Industrias Lácteas">
+        <picture><source srcset="assets/img/lacteas.webp" type="image/webp"/><img src="assets/img/lacteas.png" class="proj-img w-full object-cover" style="height:220px;" alt="Industrias Lácteas" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
@@ -629,7 +609,7 @@
     <!-- CARD 9: Presencia Regional -->
     <div class="proj-card reveal" data-category="internacional" onclick="openModal(8)">
       <div class="overflow-hidden" style="border-radius:8px 8px 0 0;background:#1B3A5C;">
-        <img src="assets/img/regional.png" class="proj-img w-full object-cover" style="height:220px;" alt="Alcance Regional">
+        <picture><source srcset="assets/img/regional.webp" type="image/webp"/><img src="assets/img/regional.png" class="proj-img w-full object-cover" style="height:220px;" alt="Alcance Regional" loading="lazy" decoding="async"/></picture>
       </div>
       <div class="p-6 border-l-4 border-tertiary-container flex flex-col justify-between" style="background:white;border-radius:0 0 8px 8px;min-height:240px;">
         <div>
